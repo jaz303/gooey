@@ -1,13 +1,16 @@
 #include "gooey/Window.hpp"
+#include "gooey/View.hpp"
 
 #include <SDL2/SDL.h>
+#include <gooey/WindowManager.hpp>
+#include <gooey/DrawingContext.hpp>
 
 using namespace gooey;
 
 Window::Window(WindowManager *windowManager)
     : windowManager_(windowManager)
 {
-
+    context_ = new DrawingContext(windowManager_->sdlRenderer());
 }
 
 Rect Window::rect() const
@@ -20,14 +23,17 @@ void Window::setRect(Rect rect)
     rect_ = rect;
 }
 
+void Window::addView(View *view)
+{
+    views_.push_back(view);
+}
+
 void Window::render()
 {
-    SDL_Rect rect;
-    rect.x = rect_.origin.x;
-    rect.y = rect_.origin.y;
-    rect.w = rect_.size.width;
-    rect.h = rect_.size.height;
+    // TODO(jwf): clip rendering?
 
-    SDL_SetRenderDrawColor(windowManager_->sdlRenderer(), 128, 0, 0, 255);
-    SDL_RenderFillRect(windowManager_->sdlRenderer(), &rect);
+    for (auto view : views_) {
+        Rect viewRect = view->rect().offset(rect_.origin);
+        view->render(context_, viewRect);
+    }
 }

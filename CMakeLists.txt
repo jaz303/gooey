@@ -10,13 +10,23 @@ set(SOURCE_FILES
     include/gooey/geom/Point.hpp
     include/gooey/geom/Rect.hpp
     include/gooey/geom/Size.hpp
+
+    include/gooey/DrawingContext.hpp
     include/gooey/Event.hpp
+    include/gooey/View.hpp
     include/gooey/Window.hpp
     include/gooey/WindowManager.hpp
+
+    include/gooey/cmp/Button.hpp
+
     include/gooey/gooey.hpp
 
+    src/DrawingContext.cpp
+    src/View.cpp
     src/Window.cpp
     src/WindowManager.cpp
+
+    src/cmp/Button.cpp
 
     main.cpp
 

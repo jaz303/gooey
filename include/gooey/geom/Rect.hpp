@@ -35,6 +35,16 @@ public:
     bool isZero() { return origin.isZero() && size.isZero(); }
 
     //
+
+    Rect offset(Point p) {
+        return offset(p.x, p.y);
+    }
+
+    Rect offset(float x, float y) {
+        return Rect(origin.x + x, origin.y + y, size.width, size.height);
+    }
+
+    //
     //
 
     inline float left()     { return origin.x; }

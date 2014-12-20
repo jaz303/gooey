@@ -23,6 +23,12 @@ int main() {
 
     Window *win = wm->createRootWindow();
 
+    Button *b1 = new Button(Rect(10, 10, 200, 60));
+    Button *b2 = new Button(Rect(10, 100, 150, 50));
+
+    win->addView(b1);
+    win->addView(b2);
+
     bool running = true;
     while (running) {
 
@@ -38,8 +44,6 @@ int main() {
                 // dispatch to wm
             }
         }
-
-
 
         wm->render();
 

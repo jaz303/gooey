@@ -1,6 +1,9 @@
-#pragma once
+#ifndef __GOOEY_WINDOWMANAGER_HPP__
+#define __GOOEY_WINDOWMANAGER_HPP__
 
-#include "gooey/gooey.hpp"
+#include "gooey/fwd.hpp"
+#include "gooey/geom/Rect.hpp"
+#include <SDL2/SDL.h>
 #include <vector>
 
 namespace gooey {
@@ -28,3 +31,5 @@ private:
 };
 
 }
+
+#endif
