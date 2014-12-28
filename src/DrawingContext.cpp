@@ -9,6 +9,11 @@ DrawingContext::DrawingContext()
 {
 }
 
+DrawingContext::~DrawingContext()
+{
+    teardown();
+}
+
 void DrawingContext::setSurface(SDL_Surface *surface)
 {
     teardown();
@@ -26,14 +31,19 @@ void DrawingContext::setSurface(SDL_Surface *surface)
     }
 }
 
-DrawingContext::~DrawingContext()
+void DrawingContext::save()
 {
-    teardown();
+    cairo_save(cairo_);
 }
 
-void DrawingContext::setFill(float r, float g, float b)
+void DrawingContext::restore()
 {
-    cairo_set_source_rgb(cairo_, r, g, b);
+    cairo_restore(cairo_);
+}
+
+void DrawingContext::clear()
+{
+    cairo_paint(cairo_);
 }
 
 void DrawingContext::translate(float dx, float dy)
@@ -61,9 +71,9 @@ void DrawingContext::loadIdentity()
     cairo_identity_matrix(cairo_);
 }
 
-void DrawingContext::clear()
+void DrawingContext::setFill(float r, float g, float b)
 {
-    cairo_paint(cairo_);
+    cairo_set_source_rgb(cairo_, r, g, b);
 }
 
 void DrawingContext::fillRect(Rect rect)
@@ -77,6 +87,9 @@ void DrawingContext::fillRect(float x, float y, float w, float h)
     cairo_rectangle(cairo_, x, y, w, h);
     cairo_fill(cairo_);
 }
+
+//
+// Private
 
 void DrawingContext::teardown()
 {

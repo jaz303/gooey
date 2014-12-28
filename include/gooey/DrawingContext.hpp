@@ -16,7 +16,10 @@ public:
 
     void setSurface(SDL_Surface *surface);
 
-    void setFill(float r, float g, float b);
+    void save();
+    void restore();
+
+    void clear();
 
     void translate(float dx, float dy);
     void scale(float s);
@@ -24,7 +27,8 @@ public:
     void rotate(float theta);
     void loadIdentity();
 
-    void clear();
+    void setFill(float r, float g, float b);
+
     void fillRect(Rect rect);
     void fillRect(float x, float y, float w, float h);
 
