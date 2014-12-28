@@ -1,4 +1,3 @@
-#include <QuartzCore/QuartzCore.h>
 #include "gooey/DrawingContext.hpp"
 
 #include <iostream>
