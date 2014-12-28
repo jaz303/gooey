@@ -73,6 +73,8 @@ void Window::render()
     context_.clear();
 
     for (auto view : views_) {
+        context_.loadIdentity();
+        context_.translate(view->x(), view->y());
         view->render(&context_, view->rect());
     }
 }

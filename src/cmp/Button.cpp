@@ -8,7 +8,6 @@ Button::Button(Rect rect)
     : View(rect)
     , pressed_(false)
 {
-
 }
 
 void Button::render(DrawingContext *ctx, Rect rect)
@@ -19,7 +18,7 @@ void Button::render(DrawingContext *ctx, Rect rect)
         ctx->setFill(0.5f, 1.0f, 0.2f);
     }
 
-    ctx->fillRect(rect);
+    ctx->fillRect(0, 0, width(), height());
 }
 
 void Button::dispatchEvent(Event *evt) {

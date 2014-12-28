@@ -16,6 +16,11 @@ public:
 
     Rect rect() const;
 
+    inline float x() const { return rect_.origin.x; }
+    inline float y() const { return rect_.origin.y; }
+    inline float width() const { return rect_.size.width; }
+    inline float height() const { return rect_.size.height; }
+
     virtual void render(DrawingContext *ctx, Rect rect);
     virtual void dispatchEvent(Event *evt);
 
