@@ -19,6 +19,7 @@ set(SOURCE_FILES
 
     include/gooey/cmp/Button.hpp
 
+    include/gooey/fwd.hpp
     include/gooey/gooey.hpp
 
     src/DrawingContext.cpp
@@ -40,5 +41,6 @@ target_link_libraries(gooey2 SDL2_image)
 target_link_libraries(gooey2 SDL2_mixer)
 target_link_libraries(gooey2 SDL2_ttf)
 target_link_libraries(gooey2 SDL2_net)
+target_link_libraries(gooey2 cairo)
 
 include_directories(include)

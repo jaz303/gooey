@@ -3,7 +3,9 @@
 
 #include "gooey/fwd.hpp"
 #include "gooey/geom/Rect.hpp"
+#include "gooey/DrawingContext.hpp"
 #include <vector>
+#include <SDL2/SDL.h>
 
 namespace gooey {
 
@@ -11,6 +13,7 @@ class Window {
 
 public:
     Window(WindowManager *windowManager);
+    ~Window();
 
     Rect rect() const;
     void setRect(Rect rect);
@@ -18,15 +21,15 @@ public:
     void addView(View *view);
 
     void render();
+    SDL_Surface* sdlSurface() { return sdlSurface_; }
 
 private:
 
-    WindowManager* windowManager_;
-    DrawingContext* context_;
-
-    Rect rect_;
-
-    std::vector<View*> views_;
+    WindowManager       *windowManager_;
+    DrawingContext      context_;
+    SDL_Surface         *sdlSurface_;
+    Rect                rect_;
+    std::vector<View*>  views_;
 
 };
 

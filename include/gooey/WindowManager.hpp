@@ -12,7 +12,6 @@ class WindowManager {
 
 public:
     WindowManager(SDL_Window *window, SDL_Renderer *renderer);
-    WindowManager(SDL_Window *window, SDL_Renderer *renderer, Rect rect);
 
     void render();
 

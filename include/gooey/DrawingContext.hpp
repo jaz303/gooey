@@ -4,23 +4,31 @@
 #include "gooey/fwd.hpp"
 #include "gooey/geom/Rect.hpp"
 #include <SDL2/SDL.h>
+#include <cairo/cairo.h>
 
 namespace gooey {
 
 class DrawingContext {
 
 public:
-    DrawingContext(SDL_Renderer *renderer);
+    DrawingContext();
+    ~DrawingContext();
+
+    void setSurface(SDL_Surface *surface);
 
     void setFill(float r, float g, float b);
 
+    void clear();
     void fillRect(Rect rect);
     void fillRect(float x, float y, float w, float h);
 
 private:
 
-    SDL_Renderer *renderer_;
+    void teardown();
 
+    SDL_Surface *sdlSurface_;
+    cairo_surface_t *cairoSurface_;
+    cairo_t *cairo_;
 };
 
 }
