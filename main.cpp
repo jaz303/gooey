@@ -15,14 +15,14 @@ int main() {
         atexit(SDL_Quit);
     }
 
-    SDL_Window *window = SDL_CreateWindow("Gooey Test", 50, 50, 1024, 768, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow("Gooey Test", 50, 50, 1024, 768, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
     //SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
    // SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
     WindowManager *wm = new WindowManager(window, 0);
 
     Window *win = wm->createRootWindow();
-    win->setRect(Rect(50, 50, 300, 300));
+    //win->setRect(Rect(50, 50, 300, 300));
 
     Button *b1 = new Button(Rect(10, 10, 200, 60));
     Button *b2 = new Button(Rect(10, 100, 150, 50));
@@ -39,6 +39,9 @@ int main() {
                 if (evt.window.event == SDL_WINDOWEVENT_CLOSE) {
                     cout << "close window requested..." << endl;
                     running = false;
+                    break;
+                } else if (evt.window.event == SDL_WINDOWEVENT_RESIZED) {
+                    wm->sdlWindowDidResize();
                     break;
                 }
             } else {

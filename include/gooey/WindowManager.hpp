@@ -20,12 +20,18 @@ public:
 
     Window* createRootWindow();
 
+    /*
+     * Call this method if the SDL window is resized
+     */
+    void sdlWindowDidResize();
+
 private:
     SDL_Window              *window_;
     SDL_Renderer            *renderer_;
     Rect                    rect_;
 
     std::vector<Window*>    windows_;
+    Window                  *rootWindow_;
 
 };
 

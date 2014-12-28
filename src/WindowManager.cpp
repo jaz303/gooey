@@ -8,10 +8,9 @@ using namespace gooey;
 WindowManager::WindowManager(SDL_Window *window, SDL_Renderer *renderer)
     : window_(window)
     , renderer_(renderer)
+    , rootWindow_(0)
 {
-    int w, h;
-    SDL_GetWindowSize(window, &w, &h);
-    rect_ = Rect(0, 0, w, h);
+    sdlWindowDidResize();
 }
 
 #include <iostream>
@@ -58,8 +57,20 @@ void WindowManager::render()
 
 Window* WindowManager::createRootWindow()
 {
-    auto rootWindow = new Window(this);
-    rootWindow->setRect(rect_);
-    windows_.push_back(rootWindow);
-    return rootWindow;
+    if (!rootWindow_) {
+        rootWindow_ = new Window(this);
+        rootWindow_->setRect(rect_);
+        windows_.push_back(rootWindow_);
+    }
+    return rootWindow_;
+}
+
+void WindowManager::sdlWindowDidResize()
+{
+    int w, h;
+    SDL_GetWindowSize(window_, &w, &h);
+    rect_ = Rect(0, 0, w, h);
+    if (rootWindow_) {
+        rootWindow_->setRect(rect_);
+    }
 }
