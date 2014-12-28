@@ -1,5 +1,5 @@
 #include "gooey/View.hpp"
-
+#include "gooey/Event.hpp"
 #include <SDL2/SDL.h>
 
 using namespace gooey;
@@ -26,5 +26,9 @@ Rect View::rect() const
 }
 
 void View::render(DrawingContext *ctx, Rect rect)
+{
+}
+
+void View::dispatchEvent(Event *evt)
 {
 }

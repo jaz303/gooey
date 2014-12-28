@@ -10,6 +10,7 @@
 #include "gooey/geom/Rect.hpp"
 
 #include "gooey/DrawingContext.hpp"
+#include "gooey/Event.hpp"
 #include "gooey/View.hpp"
 #include "gooey/Window.hpp"
 #include "gooey/WindowManager.hpp"

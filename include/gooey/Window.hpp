@@ -27,6 +27,8 @@ public:
     void render();
     SDL_Surface* sdlSurface() { return sdlSurface_; }
 
+    void dispatchEvent(Event *evt);
+
 private:
 
     WindowManager       *windowManager_;

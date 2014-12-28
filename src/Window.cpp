@@ -6,6 +6,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <gooey/Event.hpp>
 
 using namespace gooey;
 
@@ -73,5 +74,16 @@ void Window::render()
 
     for (auto view : views_) {
         view->render(&context_, view->rect());
+    }
+}
+
+void Window::dispatchEvent(Event *evt)
+{
+    for (auto iter = views_.rbegin(); iter != views_.rend(); ++iter) {
+        View *view = (*iter);
+        if (view->rect().contains(evt->windowOffset, &evt->viewOffset)) {
+            view->dispatchEvent(evt);
+            return;
+        }
     }
 }

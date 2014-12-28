@@ -59,7 +59,7 @@ public:
         return contains(p.x, p.y);
     }
 
-    bool contains(const Point p, Point &offset) {
+    bool contains(const Point p, Point *offset) {
         return contains(p.x, p.y, offset);
     }
 
@@ -67,12 +67,12 @@ public:
         return x >= left() && x < right() && y >= top() && y < bottom();
     }
 
-    bool contains(float x, float y, Point& offset) {
+    bool contains(float x, float y, Point *offset) {
         float dx = x - origin.x;
         float dy = y - origin.y;
         if (dx > 0 && dx < size.width && dy > 0 && dy < size.height) {
-            offset.x = dx;
-            offset.y = dy;
+            offset->x = dx;
+            offset->y = dy;
             return true;
         } else {
             return false;

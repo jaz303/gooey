@@ -32,20 +32,22 @@ int main() {
 
     bool running = true;
     while (running) {
+        Event evt;
 
-        SDL_Event evt;
-        while (SDL_PollEvent(&evt)) {
-            if (evt.type == SDL_WINDOWEVENT) {
-                if (evt.window.event == SDL_WINDOWEVENT_CLOSE) {
+        while (SDL_PollEvent(&evt.sdl)) {
+            evt.init();
+
+            if (evt.sdl.type == SDL_WINDOWEVENT) {
+                if (evt.sdl.window.event == SDL_WINDOWEVENT_CLOSE) {
                     cout << "close window requested..." << endl;
                     running = false;
                     break;
-                } else if (evt.window.event == SDL_WINDOWEVENT_RESIZED) {
+                } else if (evt.sdl.window.event == SDL_WINDOWEVENT_RESIZED) {
                     wm->sdlWindowDidResize();
                     break;
                 }
-            } else {
-                // dispatch to wm
+            } else if (!wm->dispatchEvent(&evt)) {
+                // event wasn't handled by the window manager
             }
         }
 

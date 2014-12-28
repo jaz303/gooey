@@ -14,7 +14,11 @@ public:
 
     void render(DrawingContext *ctx, Rect rect);
 
+    virtual void dispatchEvent(Event *evt) override;
+
 private:
+
+    bool pressed_;
 
 };
 

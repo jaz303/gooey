@@ -18,6 +18,12 @@ public:
 
     void setFill(float r, float g, float b);
 
+    void translate(float dx, float dy);
+    void scale(float s);
+    void scale(float sx, float sy);
+    void rotate(float theta);
+    void loadIdentity();
+
     void clear();
     void fillRect(Rect rect);
     void fillRect(float x, float y, float w, float h);

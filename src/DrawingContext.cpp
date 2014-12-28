@@ -36,6 +36,31 @@ void DrawingContext::setFill(float r, float g, float b)
     cairo_set_source_rgb(cairo_, r, g, b);
 }
 
+void DrawingContext::translate(float dx, float dy)
+{
+    cairo_translate(cairo_, dx, dy);
+}
+
+void DrawingContext::scale(float s)
+{
+    cairo_scale(cairo_, s, s);
+}
+
+void DrawingContext::scale(float sx, float sy)
+{
+    cairo_scale(cairo_, sx, sy);
+}
+
+void DrawingContext::rotate(float theta)
+{
+    cairo_rotate(cairo_, theta);
+}
+
+void DrawingContext::loadIdentity()
+{
+    cairo_identity_matrix(cairo_);
+}
+
 void DrawingContext::clear()
 {
     cairo_paint(cairo_);

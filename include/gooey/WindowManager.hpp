@@ -18,6 +18,8 @@ public:
     inline SDL_Window* sdlWindow() const { return window_; }
     inline SDL_Renderer* sdlRenderer() const { return renderer_; }
 
+    bool dispatchEvent(Event *evt);
+
     Window* createRootWindow();
 
     /*

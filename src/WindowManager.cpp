@@ -1,3 +1,4 @@
+#include <gooey/Event.hpp>
 #include "gooey/WindowManager.hpp"
 
 #include "gooey/geom/Rect.hpp"
@@ -11,6 +12,21 @@ WindowManager::WindowManager(SDL_Window *window, SDL_Renderer *renderer)
     , rootWindow_(0)
 {
     sdlWindowDidResize();
+}
+
+bool WindowManager::dispatchEvent(Event *evt)
+{
+    if (evt->isSpatial()) {
+        for (auto iter = windows_.rbegin(); iter != windows_.rend(); ++iter) {
+            Window *window = *iter;
+            if (window->rect().contains(evt->screenOffset, &evt->windowOffset)) {
+                window->dispatchEvent(evt);
+                return true;
+            }
+        }
+    }
+    // TODO(jwf): dispatch keyboard event when we have key windows
+    return false;
 }
 
 #include <iostream>

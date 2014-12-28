@@ -17,6 +17,7 @@ public:
     Rect rect() const;
 
     virtual void render(DrawingContext *ctx, Rect rect);
+    virtual void dispatchEvent(Event *evt);
 
 private:
 
