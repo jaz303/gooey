@@ -68,13 +68,10 @@ void Window::addView(View *view)
 
 void Window::render()
 {
-    // TODO(jwf): clip rendering?
-
     context_.setFill(1.0, 0, 1.0);
     context_.clear();
 
     for (auto view : views_) {
-//        Rect viewRect = view->rect().offset(rect_.origin);
         view->render(&context_, view->rect());
     }
 }
