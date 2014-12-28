@@ -16,6 +16,10 @@ public:
     ~Window();
 
     Rect rect() const;
+
+    /*
+     * NOTE: rect will be rounded to integral origin/size
+     */
     void setRect(Rect rect);
 
     void addView(View *view);
