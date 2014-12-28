@@ -30,6 +30,8 @@ Rect Window::rect() const
 
 void Window::setRect(Rect rect)
 {
+    rect.origin.x = ceilf(rect.origin.x);
+    rect.origin.y = ceilf(rect.origin.y);
     rect.size.width = ceilf(rect.size.width);
     rect.size.height = ceilf(rect.size.height);
 
