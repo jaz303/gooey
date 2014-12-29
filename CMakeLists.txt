@@ -29,6 +29,8 @@ set(SOURCE_FILES
 
     src/cmp/Button.cpp
 
+    src/debug.cpp
+
     main.cpp
 
 )

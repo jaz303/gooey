@@ -17,6 +17,8 @@ public:
 
     Rect rect() const;
 
+    WindowManager* windowManager() const { return windowManager_; }
+
     /*
      * NOTE: rect will be rounded to integral origin/size
      */

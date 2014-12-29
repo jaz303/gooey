@@ -64,6 +64,7 @@ void Window::setRect(Rect rect)
 
 void Window::addView(View *view)
 {
+    view->setWindow(this);
     views_.push_back(view);
 }
 

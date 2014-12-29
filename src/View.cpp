@@ -1,5 +1,7 @@
 #include "gooey/View.hpp"
 #include "gooey/Event.hpp"
+#include "gooey/Window.hpp"
+#include "gooey/WindowManager.hpp"
 #include <SDL2/SDL.h>
 
 using namespace gooey;
@@ -31,4 +33,17 @@ void View::render(DrawingContext *ctx, Rect rect)
 
 void View::dispatchEvent(Event *evt)
 {
+}
+
+//
+// Protected
+
+void View::startTappingEvents()
+{
+    window()->windowManager()->installEventTapToView(this);
+}
+
+void View::stopTappingEvents()
+{
+    window()->windowManager()->uninstallEventTapToView(this);
 }

@@ -25,9 +25,17 @@ void Button::dispatchEvent(Event *evt) {
     switch (evt->type()) {
         case SDL_MOUSEBUTTONDOWN:
             pressed_ = true;
+            startTappingEvents();
             break;
         case SDL_MOUSEBUTTONUP:
             pressed_ = false;
+            if (rect_.contains(evt->windowOffset)) {
+                std::cout << "mouse up inside!" << std::endl;
+            }
+            std::cout << "so: " << evt->screenOffset << std::endl;
+            std::cout << "wo: " << evt->windowOffset << std::endl;
+            std::cout << "vo: " << evt->viewOffset << std::endl;
+            stopTappingEvents();
             break;
     }
 }

@@ -27,6 +27,16 @@ public:
      */
     void sdlWindowDidResize();
 
+    /*
+     *
+     */
+    void installEventTapToView(View *view);
+
+    /*
+     *
+     */
+    void uninstallEventTapToView(View *view);
+
 private:
     SDL_Window              *window_;
     SDL_Renderer            *renderer_;
@@ -34,6 +44,7 @@ private:
 
     std::vector<Window*>    windows_;
     Window                  *rootWindow_;
+    View                    *tappedView_;
 
 };
 

@@ -1,6 +1,8 @@
 #ifndef __GOOEY_POINT_HPP__
 #define __GOOEY_POINT_HPP__
 
+#include <iostream>
+
 namespace gooey {
 
 class Point {
@@ -21,6 +23,8 @@ public:
 
     float x, y;
 };
+
+std::ostream& operator<<(std::ostream& os, Point& p);
 
 }
 

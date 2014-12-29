@@ -14,7 +14,7 @@ Cairo docs: http://cairographics.org/documentation/
 
 ### Next Up
 
-  - [ ] Event capturing e.g. for handling clicks/drags
+  - [x] Event capturing e.g. for handling clicks/drags
   - [ ] Containers/panels (toolbar)
   - [ ] SDL view for rendering other output
   - [ ] Knobs, sliders

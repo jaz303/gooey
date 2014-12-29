@@ -1,4 +1,5 @@
 #include <gooey/Event.hpp>
+#include <gooey/View.hpp>
 #include "gooey/WindowManager.hpp"
 
 #include "gooey/geom/Rect.hpp"
@@ -10,12 +11,21 @@ WindowManager::WindowManager(SDL_Window *window, SDL_Renderer *renderer)
     : window_(window)
     , renderer_(renderer)
     , rootWindow_(0)
+    , tappedView_(0)
 {
     sdlWindowDidResize();
 }
 
 bool WindowManager::dispatchEvent(Event *evt)
 {
+    if (tappedView_) {
+        Window *window = tappedView_->window();
+        window->rect().contains(evt->screenOffset, &evt->windowOffset);
+        tappedView_->rect().contains(evt->windowOffset, &evt->viewOffset);
+        tappedView_->dispatchEvent(evt);
+        return true;
+    }
+
     if (evt->isSpatial()) {
         for (auto iter = windows_.rbegin(); iter != windows_.rend(); ++iter) {
             Window *window = *iter;
@@ -88,5 +98,23 @@ void WindowManager::sdlWindowDidResize()
     rect_ = Rect(0, 0, w, h);
     if (rootWindow_) {
         rootWindow_->setRect(rect_);
+    }
+}
+
+void WindowManager::installEventTapToView(View *view)
+{
+    if (tappedView_ != 0) {
+        // TODO(jwf): report error/crash horribly
+    } else {
+        tappedView_ = view;
+    }
+}
+
+void WindowManager::uninstallEventTapToView(View *view)
+{
+    if (tappedView_ != view) {
+        // TODO(jwf): report error/crash horribly
+    } else {
+        tappedView_ = 0;
     }
 }

@@ -24,7 +24,10 @@ public:
     virtual void render(DrawingContext *ctx, Rect rect);
     virtual void dispatchEvent(Event *evt);
 
-private:
+protected:
+
+    void startTappingEvents();
+    void stopTappingEvents();
 
     Window*         window_;
     Rect            rect_;

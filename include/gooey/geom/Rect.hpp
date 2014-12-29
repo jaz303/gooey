@@ -68,15 +68,12 @@ public:
     }
 
     bool contains(float x, float y, Point *offset) const {
-        float dx = x - origin.x;
-        float dy = y - origin.y;
-        if (dx > 0 && dx < size.width && dy > 0 && dy < size.height) {
-            offset->x = dx;
-            offset->y = dy;
-            return true;
-        } else {
-            return false;
-        }
+        offset->x = x - origin.x;
+        offset->y = y - origin.y;
+        return offset->x > 0
+                && offset->x < size.width
+                && offset->y > 0
+                && offset->y < size.height;
     }
 
     //
