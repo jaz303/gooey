@@ -15,15 +15,15 @@ Cairo docs: http://cairographics.org/documentation/
 ### Next Up
 
   - [x] Event capturing e.g. for handling clicks/drags
-  - [ ] Containers/panels (toolbar)
-  - [ ] SDL view for rendering other output
-  - [ ] Knobs, sliders
-  - [ ] Check box
-  - [ ] Radio button/group
-  - [ ] Labels
-  - [ ] Key windows
-  - [ ] Text field
-  - [ ] Split views
+  - [ ] Decide how coordinate system should work for nested views
+  - [ ] Container (toolbar)
+  - [ ] Layout manager for toolbar
+  - [ ] Knob
+  - [ ] Slider
+  - [ ] Split view
+  - [ ] SDL container view
+
+This leaves: text inputs, labels, check boxes, radio buttons, floating windows, key windows
 
 ### Deferred
 
