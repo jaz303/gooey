@@ -15,7 +15,7 @@ public:
         return *this;
     }
 
-    bool isZero() {
+    bool isZero() const {
         return x == 0 && y == 0;
     }
 

@@ -15,7 +15,7 @@ public:
         return *this;
     }
 
-    bool isZero() {
+    bool isZero() const {
         return width == 0 && height == 0;
     }
 

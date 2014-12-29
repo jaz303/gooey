@@ -32,42 +32,42 @@ public:
         return *this;
     }
 
-    bool isZero() { return origin.isZero() && size.isZero(); }
+    bool isZero() const { return origin.isZero() && size.isZero(); }
 
     //
 
-    Rect offset(Point p) {
+    Rect offset(Point p) const {
         return offset(p.x, p.y);
     }
 
-    Rect offset(float x, float y) {
+    Rect offset(float x, float y) const {
         return Rect(origin.x + x, origin.y + y, size.width, size.height);
     }
 
     //
     //
 
-    inline float left()     { return origin.x; }
-    inline float right()    { return origin.x + size.width; }
-    inline float top()      { return origin.y; }
-    inline float bottom()   { return origin.y + size.height; }
+    inline float left() const   { return origin.x; }
+    inline float right() const  { return origin.x + size.width; }
+    inline float top() const    { return origin.y; }
+    inline float bottom() const { return origin.y + size.height; }
 
     //
     // Containment
 
-    bool contains(const Point p) {
+    bool contains(const Point p) const {
         return contains(p.x, p.y);
     }
 
-    bool contains(const Point p, Point *offset) {
+    bool contains(const Point p, Point *offset) const {
         return contains(p.x, p.y, offset);
     }
 
-    bool contains(float x, float y) {
+    bool contains(float x, float y) const {
         return x >= left() && x < right() && y >= top() && y < bottom();
     }
 
-    bool contains(float x, float y, Point *offset) {
+    bool contains(float x, float y, Point *offset) const {
         float dx = x - origin.x;
         float dy = y - origin.y;
         if (dx > 0 && dx < size.width && dy > 0 && dy < size.height) {
@@ -82,7 +82,7 @@ public:
     //
     // SDL interop
 
-    SDL_Rect toSDLRect() {
+    SDL_Rect toSDLRect() const {
         SDL_Rect out;
         out.x = (int)origin.x;
         out.y = (int)origin.y;
@@ -91,7 +91,7 @@ public:
         return out;
     }
 
-    void fillSDLRect(SDL_Rect *rect) {
+    void fillSDLRect(SDL_Rect *rect) const {
         rect->x = (int)origin.x;
         rect->y = (int)origin.y;
         rect->w = (int)size.width;
