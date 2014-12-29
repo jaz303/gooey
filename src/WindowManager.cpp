@@ -19,9 +19,11 @@ WindowManager::WindowManager(SDL_Window *window, SDL_Renderer *renderer)
 bool WindowManager::dispatchEvent(Event *evt)
 {
     if (tappedView_) {
-        Window *window = tappedView_->window();
-        window->rect().contains(evt->screenOffset, &evt->windowOffset);
-        tappedView_->rect().contains(evt->windowOffset, &evt->viewOffset);
+        if (evt->isSpatial()) {
+            Window *window = tappedView_->window();
+            window->rect().contains(evt->screenOffset, &evt->windowOffset);
+            tappedView_->rect().contains(evt->windowOffset, &evt->viewOffset);
+        }
         tappedView_->dispatchEvent(evt);
         return true;
     }
