@@ -21,7 +21,8 @@ void Button::render(DrawingContext *ctx, Rect rect)
     ctx->fillRect(0, 0, width(), height());
 }
 
-void Button::dispatchEvent(Event *evt) {
+void Button::dispatchEvent(Event *evt)
+{
     switch (evt->type()) {
         case SDL_MOUSEBUTTONDOWN:
             pressed_ = true;
