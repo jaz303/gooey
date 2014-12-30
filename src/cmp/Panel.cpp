@@ -36,7 +36,7 @@ View* Panel::findEventTarget(Event *evt)
         View *view = *iter;
         if (view->rect().contains(evt->viewOffset)) {
             evt->viewOffset = view->rect().offsetOf(evt->viewOffset);
-            return view;
+            return view->findEventTarget(evt);
         }
     }
     return this;
