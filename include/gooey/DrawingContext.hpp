@@ -19,6 +19,9 @@ public:
     void save();
     void restore();
 
+    void clip(Rect rect);
+    void clip(float x, float y, float w, float h);
+
     void clear();
 
     void translate(float dx, float dy);

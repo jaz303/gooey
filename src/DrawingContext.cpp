@@ -44,6 +44,18 @@ void DrawingContext::restore()
     cairo_restore(cairo_);
 }
 
+void DrawingContext::clip(Rect rect)
+{
+    cairo_rectangle(cairo_, rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
+    cairo_clip(cairo_);
+}
+
+void DrawingContext::clip(float x, float y, float w, float h)
+{
+    cairo_rectangle(cairo_, x, y, w, h);
+    cairo_clip(cairo_);
+}
+
 void DrawingContext::clear()
 {
     cairo_paint(cairo_);
