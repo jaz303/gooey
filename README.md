@@ -16,12 +16,13 @@ Cairo docs: http://cairographics.org/documentation/
 
   - [x] Event capturing e.g. for handling clicks/drags
   - [x] Decide how coordinate system should work for nested views
-  - [ ] Container (toolbar)
-  - [ ] Layout manager for toolbar
-  - [ ] Knob
-  - [ ] Slider
+  - [ ] Panel (background color, subviews)
   - [ ] Split view
   - [ ] SDL container view
+  - [ ] Knob
+  - [ ] Slider
+  - [ ] Layout manager for toolbar
+  
 
 This leaves: text inputs, labels, check boxes, radio buttons, floating windows, key windows
 
