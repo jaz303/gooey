@@ -28,7 +28,9 @@ public:
      *
      * `evt` will have been preprocessed such that its `viewOffset`
      * member contains the correct offset of the event relative to
-     * this view's `rect()`.
+     * this view's `rect()`. For example, a `viewOffset` of (0,0)
+     * indicates that the event took place at the top-left corner
+     * of this view.
      *
      * For non-container views, this method should simply return `this`.
      *
