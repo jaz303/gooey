@@ -20,12 +20,17 @@ void Panel::render(DrawingContext *ctx, Rect invalidRect)
     ctx->setFill(0.0f, 0.0f, 1.0f);
     ctx->fillRect(0, 0, width(), height());
 
+    ctx->save();
+    ctx->clip(0, 0, width(), height());
+
     for (auto view : subViews_) {
-        Rect viewRect = view->rect();
+        auto viewRect = view->rect();
         ctx->translate(viewRect.origin.x, viewRect.origin.y);
         view->render(ctx, Rect());
         ctx->translate(-viewRect.origin.x, -viewRect.origin.y);
     }
+
+    ctx->restore();
 }
 
 #include <iostream>
