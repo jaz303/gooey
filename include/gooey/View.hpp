@@ -11,7 +11,7 @@ class View {
 public:
     View(Rect rect);
 
-    Window* window() const;
+    inline Window* window() const { return window_; };
     void setWindow(Window *window);
 
     Rect rect() const;
@@ -50,8 +50,11 @@ protected:
     void startTappingEvents();
     void stopTappingEvents();
 
-    Window*         window_;
     Rect            rect_;
+
+private:
+
+    Window*         window_;
 
 };
 

@@ -22,13 +22,18 @@ int main() {
     WindowManager *wm = new WindowManager(window, 0);
 
     Window *win = wm->createRootWindow();
-    win->setRect(Rect(50, 50, 300, 300));
+    win->setRect(Rect(50, 50, 320, 300));
 
-    Button *b1 = new Button(Rect(10, 10, 200, 60));
-    Button *b2 = new Button(Rect(100, 100, 150, 50));
+    Panel *p1 = new Panel(Rect(10, 10, 300, 60));
+    win->addView(p1);
 
-    win->addView(b1);
-    win->addView(b2);
+    Button *b1 = new Button(Rect(10, 10, 200, 40));
+    Button *b2 = new Button(Rect(220, 10, 70, 40));
+    p1->addSubView(b1);
+    p1->addSubView(b2);
+//
+//    win->addView(b1);
+//    win->addView(b2);
 
     bool running = true;
     while (running) {

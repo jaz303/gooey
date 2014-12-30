@@ -16,5 +16,6 @@
 #include "gooey/WindowManager.hpp"
 
 #include "gooey/cmp/Button.hpp"
+#include "gooey/cmp/Panel.hpp"
 
 #endif

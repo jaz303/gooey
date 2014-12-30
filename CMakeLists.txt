@@ -18,6 +18,7 @@ set(SOURCE_FILES
     include/gooey/WindowManager.hpp
 
     include/gooey/cmp/Button.hpp
+    include/gooey/cmp/Panel.hpp
 
     include/gooey/fwd.hpp
     include/gooey/gooey.hpp
@@ -28,6 +29,7 @@ set(SOURCE_FILES
     src/WindowManager.cpp
 
     src/cmp/Button.cpp
+    src/cmp/Panel.cpp
 
     src/debug.cpp
 

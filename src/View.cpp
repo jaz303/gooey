@@ -11,11 +11,6 @@ View::View(Rect rect)
 {
 }
 
-Window* View::window() const
-{
-    return window_;
-}
-
 void View::setWindow(Window *window)
 {
     window_ = window;

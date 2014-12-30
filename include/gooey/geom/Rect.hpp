@@ -76,6 +76,10 @@ public:
                 && offset->y < size.height;
     }
 
+    Point offsetOf(Point p) const {
+        return Point(p.x - origin.x, p.y - origin.y);
+    }
+
     //
     // SDL interop
 
@@ -98,6 +102,8 @@ public:
     Point origin;
     Size size;
 };
+
+std::ostream& operator<<(std::ostream& os, Rect& p);
 
 }
 

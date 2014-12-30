@@ -9,4 +9,14 @@ std::ostream &operator<<(std::ostream &os, Point &p) {
     return os;
 }
 
+std::ostream &operator<<(std::ostream &os, Size &s) {
+    os << '<' << s.width << 'x' << s.height << '>';
+    return os;
+}
+
+std::ostream &operator<<(std::ostream &os, Rect &r) {
+    os << "<Rect origin=" << r.origin << " size=" << r.size << ">";
+    return os;
+}
+
 }

@@ -22,6 +22,8 @@ public:
     float width, height;
 };
 
+std::ostream& operator<<(std::ostream& os, Size& s);
+
 }
 
 #endif
