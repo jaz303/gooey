@@ -10,6 +10,7 @@ SplitView::SplitView(Rect rect)
     , splitRatio_(0.33333f)
     , firstView_(0)
     , secondView_(0)
+    , resizing_(false)
 {
 }
 
@@ -84,6 +85,39 @@ View* SplitView::findEventTarget(Event *evt)
         return secondView_->findEventTarget(evt);
     } else {
         return this;
+    }
+}
+
+void SplitView::dispatchEvent(Event *evt)
+{
+    switch (evt->type()) {
+        case SDL_MOUSEBUTTONDOWN:
+        {
+            auto dp = dividerPosition();
+            if (evt->viewOffset.x >= dp && evt->viewOffset.x < (dp + dividerWidth())) {
+                std::cout << "mouse down on divider!" << std::endl;
+                resizing_ = true;
+                startTappingEvents();
+                // TODO: stash offsets etc
+            }
+            break;
+        }
+        case SDL_MOUSEMOTION:
+        {
+            if (resizing_) {
+                std::cout << "do resize stuff!" << std::endl;
+            }
+            break;
+        };
+        case SDL_MOUSEBUTTONUP:
+        {
+            if (resizing_) {
+                std::cout << "resize complete!" << std::endl;
+                resizing_ = false;
+                stopTappingEvents();
+            }
+            break;
+        }
     }
 }
 

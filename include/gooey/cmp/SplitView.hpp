@@ -23,6 +23,7 @@ public:
     virtual void render(DrawingContext *ctx, Rect invalidRect) override;
 
     virtual View* findEventTarget(Event *evt) override;
+    virtual void dispatchEvent(Event *evt) override;
 
 private:
 
@@ -30,6 +31,7 @@ private:
     float splitRatio_;
     View *firstView_;
     View *secondView_;
+    bool resizing_;
 
     void updateChildRects(bool c1, bool c2);
 
