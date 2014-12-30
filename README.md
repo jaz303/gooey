@@ -40,7 +40,8 @@ This leaves: text inputs, labels, check boxes, radio buttons, floating windows, 
 
 ## General Deficiencies
 
-  - Raw pointers are used liberally. They should be replaced with smart pointers. 
+  - Raw pointers are used liberally. They should be replaced with smart pointers.
+  - No consideration has yet been given whatsoever to setting the cursor.
   
 ## Limitations
 
