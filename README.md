@@ -17,7 +17,8 @@ Cairo docs: http://cairographics.org/documentation/
   - [x] Event capturing e.g. for handling clicks/drags
   - [x] Decide how coordinate system should work for nested views
   - [x] Panel (background color, subviews)
-  - [ ] Split view
+  - [x] Split view - groundwork
+  - [ ] Split view - drag-resize 
   - [ ] Use clipping when rendering containers
   - [ ] SDL container view
   - [ ] Knob
