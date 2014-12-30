@@ -5,6 +5,8 @@
 #include "gooey/View.hpp"
 #include "gooey/geom/Rect.hpp"
 
+// TODO(jwf): support horizontal and vertical orientation
+
 namespace gooey {
 
 class SplitView : public View {
@@ -14,8 +16,8 @@ public:
 
     virtual void setRect(Rect rect) override;
 
-    inline float dividerWidth() const { return dividerWidth_; }
-    void setDividerWidth(float newDividerWidth);
+    inline float dividerSize() const { return dividerSize_; }
+    void setDividerSize(float newDividerSize);
 
     void setLeftView(View *view);
     void setRightView(View *view);
@@ -27,7 +29,7 @@ public:
 
 private:
 
-    float dividerWidth_;
+    float dividerSize_;
     float splitRatio_;
     View *firstView_;
     View *secondView_;
@@ -37,7 +39,7 @@ private:
 
     inline float dividerPosition() const {
         float dividerMidPoint = width() * splitRatio_;
-        float dividerLeft = dividerMidPoint - (dividerWidth_ * 0.5f);
+        float dividerLeft = dividerMidPoint - (dividerSize_ * 0.5f);
         return dividerLeft;
     }
 

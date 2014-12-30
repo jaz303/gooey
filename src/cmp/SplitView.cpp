@@ -6,7 +6,7 @@ using namespace gooey;
 
 SplitView::SplitView(Rect rect)
     : View(rect)
-    , dividerWidth_(10)
+    , dividerSize_(10)
     , splitRatio_(0.33333f)
     , firstView_(0)
     , secondView_(0)
@@ -20,9 +20,9 @@ void SplitView::setRect(Rect rect)
     updateChildRects(true, true);
 }
 
-void SplitView::setDividerWidth(float newDividerWidth)
+void SplitView::setDividerSize(float newDividerSize)
 {
-    dividerWidth_ = newDividerWidth;
+    dividerSize_ = newDividerSize;
     updateChildRects(true, true);
 }
 
@@ -48,7 +48,7 @@ void SplitView::render(DrawingContext *ctx, Rect invalidRect)
     // color.
     float dp = dividerPosition();
     ctx->setFill(0.5f, 0.5f, 0.5f);
-    ctx->fillRect(dp - 1.0f, 0, dividerWidth() + 2.0f, height());
+    ctx->fillRect(dp - 1.0f, 0, dividerSize() + 2.0f, height());
 
     Rect viewRect;
 
@@ -80,7 +80,7 @@ View* SplitView::findEventTarget(Event *evt)
     if (firstView_ && evt->viewOffset.x < dp) {
         evt->viewOffset = firstView_->rect().offsetOf(evt->viewOffset);
         return firstView_->findEventTarget(evt);
-    } else if (secondView_ && evt->viewOffset.x >= (dp + dividerWidth())) {
+    } else if (secondView_ && evt->viewOffset.x >= (dp + dividerSize())) {
         evt->viewOffset = secondView_->rect().offsetOf(evt->viewOffset);
         return secondView_->findEventTarget(evt);
     } else {
@@ -94,7 +94,7 @@ void SplitView::dispatchEvent(Event *evt)
         case SDL_MOUSEBUTTONDOWN:
         {
             auto dp = dividerPosition();
-            if (evt->viewOffset.x >= dp && evt->viewOffset.x < (dp + dividerWidth())) {
+            if (evt->viewOffset.x >= dp && evt->viewOffset.x < (dp + dividerSize())) {
                 std::cout << "mouse down on divider!" << std::endl;
                 resizing_ = true;
                 startTappingEvents();
@@ -132,7 +132,7 @@ void SplitView::updateChildRects(bool c1, bool c2)
     }
 
     if (c2 && secondView_) {
-        float left = dp + dividerWidth();
+        float left = dp + dividerSize();
         secondView_->setRect(Rect(left, 0, width() - left, height()));
     }
 }
