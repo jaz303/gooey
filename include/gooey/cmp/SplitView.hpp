@@ -14,6 +14,9 @@ public:
 
     virtual void setRect(Rect rect) override;
 
+    inline float dividerWidth() const { return dividerWidth_; }
+    void setDividerWidth(float newDividerWidth);
+
     void setLeftView(View *view);
     void setRightView(View *view);
 
@@ -23,11 +26,18 @@ public:
 
 private:
 
+    float dividerWidth_;
     float splitRatio_;
     View *firstView_;
     View *secondView_;
 
     void updateChildRects(bool c1, bool c2);
+
+    inline float dividerPosition() const {
+        float dividerMidPoint = width() * splitRatio_;
+        float dividerLeft = dividerMidPoint - (dividerWidth_ * 0.5f);
+        return dividerLeft;
+    }
 
 };
 

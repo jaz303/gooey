@@ -2,13 +2,12 @@
 #include "gooey/DrawingContext.hpp"
 #include "gooey/Event.hpp"
 
-static const int DIVIDER_WIDTH = 8;
-
 using namespace gooey;
 
 SplitView::SplitView(Rect rect)
     : View(rect)
-    , splitRatio_(0.5f)
+    , dividerWidth_(10)
+    , splitRatio_(0.33333f)
     , firstView_(0)
     , secondView_(0)
 {
@@ -17,6 +16,12 @@ SplitView::SplitView(Rect rect)
 void SplitView::setRect(Rect rect)
 {
     View::setRect(rect);
+    updateChildRects(true, true);
+}
+
+void SplitView::setDividerWidth(float newDividerWidth)
+{
+    dividerWidth_ = newDividerWidth;
     updateChildRects(true, true);
 }
 
@@ -36,8 +41,13 @@ void SplitView::setRightView(View *view)
 
 void SplitView::render(DrawingContext *ctx, Rect invalidRect)
 {
-//    ctx->setFill(0, 1, 1);
-//    ctx->fillRect(0, 0, width(), height());
+    // NOTE(jwf): this is a little bodge to prevent the superview's
+    // background color haloing the divider. we just make the divider
+    // a pixel wider at each side to fully obscure the background
+    // color.
+    float dp = dividerPosition();
+    ctx->setFill(0.5f, 0.5f, 0.5f);
+    ctx->fillRect(dp - 1.0f, 0, dividerWidth() + 2.0f, height());
 
     Rect viewRect;
 
@@ -46,6 +56,8 @@ void SplitView::render(DrawingContext *ctx, Rect invalidRect)
         ctx->translate(viewRect.origin.x, viewRect.origin.y);
         firstView_->render(ctx, Rect());
         ctx->translate(-viewRect.origin.x, -viewRect.origin.y);
+    } else {
+        // TODO(jwf): solid fill
     }
 
     if (secondView_) {
@@ -53,42 +65,40 @@ void SplitView::render(DrawingContext *ctx, Rect invalidRect)
         ctx->translate(viewRect.origin.x, viewRect.origin.y);
         secondView_->render(ctx, Rect());
         ctx->translate(-viewRect.origin.x, -viewRect.origin.y);
+    } else {
+        // TODO(jwf): solid fill
     }
-
-    // TODO(jwf): draw divider
-
-
-//    ctx->setFill(0.0f, 0.0f, 1.0f);
-//    ctx->fillRect(0, 0, width(), height());
-//
-//    for (auto view : subViews_) {
-//        Rect viewRect = view->rect();
-//        ctx->translate(viewRect.origin.x, viewRect.origin.y);
-//        view->render(ctx, Rect());
-//        ctx->translate(-viewRect.origin.x, -viewRect.origin.y);
-//    }
 }
 
 #include <iostream>
 
 View* SplitView::findEventTarget(Event *evt)
 {
-//    for (auto iter = subViews_.rbegin(); iter != subViews_.rend(); ++iter) {
-//        View *view = *iter;
-//        if (view->rect().contains(evt->viewOffset)) {
-//            evt->viewOffset = view->rect().offsetOf(evt->viewOffset);
-//            return view;
-//        }
-//    }
-    return this;
+    auto dp = dividerPosition();
+
+    if (firstView_ && evt->viewOffset.x < dp) {
+        evt->viewOffset = firstView_->rect().offsetOf(evt->viewOffset);
+        return firstView_->findEventTarget(evt);
+    } else if (secondView_ && evt->viewOffset.x >= (dp + dividerWidth())) {
+        evt->viewOffset = secondView_->rect().offsetOf(evt->viewOffset);
+        return secondView_->findEventTarget(evt);
+    } else {
+        return this;
+    }
 }
 
 void SplitView::updateChildRects(bool c1, bool c2)
 {
+    // TODO(jwf): handle case where not enough space
+
+    float dp = dividerPosition();
+
     if (c1 && firstView_) {
-
+        firstView_->setRect(Rect(0, 0, dp, height()));
     }
-    if (c2 && secondView_) {
 
+    if (c2 && secondView_) {
+        float left = dp + dividerWidth();
+        secondView_->setRect(Rect(left, 0, width() - left, height()));
     }
 }
