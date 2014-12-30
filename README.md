@@ -18,6 +18,7 @@ Cairo docs: http://cairographics.org/documentation/
   - [x] Decide how coordinate system should work for nested views
   - [x] Panel (background color, subviews)
   - [ ] Split view
+  - [ ] Use clipping when rendering containers
   - [ ] SDL container view
   - [ ] Knob
   - [ ] Slider
