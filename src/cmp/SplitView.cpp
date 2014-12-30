@@ -28,15 +28,27 @@ void SplitView::setDividerSize(float newDividerSize)
 
 void SplitView::setLeftView(View *view)
 {
-    view->setWindow(window());
-    firstView_ = view;
+    if (firstView_) {
+        firstView_->setWindow(0);
+        firstView_ = 0;
+    }
+    if (view) {
+        view->setWindow(window());
+        firstView_ = view;
+    }
     updateChildRects(true, false);
 }
 
 void SplitView::setRightView(View *view)
 {
-    view->setWindow(window());
-    secondView_ = view;
+    if (secondView_) {
+        secondView_->setWindow(0);
+        secondView_ = 0;
+    }
+    if (view) {
+        view->setWindow(window());
+        secondView_ = view;
+    }
     updateChildRects(false, true);
 }
 
