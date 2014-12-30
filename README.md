@@ -6,6 +6,12 @@ Current status: unfinished & useless
 
 Not sure what direction this is going to take.
 
+## Screenshot
+
+![gooey screenshot](gooey.png)
+
+This shows a toolbar, various buttons, panels and vertical split view.
+
 ## References
 
 Cairo docs: http://cairographics.org/documentation/
