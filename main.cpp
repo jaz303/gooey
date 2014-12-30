@@ -22,10 +22,19 @@ int main() {
     WindowManager *wm = new WindowManager(window, 0);
 
     Window *win = wm->createRootWindow();
-    win->setRect(Rect(50, 50, 320, 300));
+    win->setRect(Rect(50, 50, 640, 500));
 
-    Panel *p1 = new Panel(Rect(10, 10, 300, 60));
+    Panel *p1 = new Panel(Rect(10, 10, 620, 60));
     win->addView(p1);
+
+    SplitView *sp1 = new SplitView(Rect(10, 80, 620, 410));
+    win->addView(sp1);
+
+    Panel *p2 = new Panel(Rect());
+    sp1->setLeftView(p2);
+
+    Panel *p3 = new Panel(Rect());
+    sp1->setRightView(p3);
 
     Button *b1 = new Button(Rect(10, 10, 200, 40));
     Button *b2 = new Button(Rect(220, 10, 70, 40));

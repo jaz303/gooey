@@ -17,6 +17,7 @@ class WindowManager;
 
 class Button;
 class Panel;
+class SplitView;
 
 }
 

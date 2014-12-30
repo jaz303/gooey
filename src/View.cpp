@@ -21,6 +21,11 @@ Rect View::rect() const
     return rect_;
 }
 
+void View::setRect(Rect rect)
+{
+    rect_ = rect;
+}
+
 void View::render(DrawingContext *ctx, Rect invalidRect)
 {
 }

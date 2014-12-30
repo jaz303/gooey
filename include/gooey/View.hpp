@@ -15,6 +15,7 @@ public:
     void setWindow(Window *window);
 
     Rect rect() const;
+    virtual void setRect(Rect rect);
 
     inline float x() const { return rect_.origin.x; }
     inline float y() const { return rect_.origin.y; }
