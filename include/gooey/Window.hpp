@@ -29,7 +29,7 @@ public:
     void render();
     SDL_Surface* sdlSurface() { return sdlSurface_; }
 
-    void dispatchEvent(Event *evt);
+    View* findEventTarget(Event *evt);
 
 private:
 

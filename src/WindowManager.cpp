@@ -18,23 +18,20 @@ WindowManager::WindowManager(SDL_Window *window, SDL_Renderer *renderer)
 
 bool WindowManager::dispatchEvent(Event *evt)
 {
-    if (tappedView_) {
-        if (evt->isSpatial()) {
-            Window *window = tappedView_->window();
-            window->rect().contains(evt->screenOffset, &evt->windowOffset);
-            tappedView_->rect().contains(evt->windowOffset, &evt->viewOffset);
-        }
-        tappedView_->dispatchEvent(evt);
-        return true;
-    }
-
     if (evt->isSpatial()) {
         for (auto iter = windows_.rbegin(); iter != windows_.rend(); ++iter) {
             Window *window = *iter;
             if (window->rect().contains(evt->screenOffset, &evt->windowOffset)) {
-                window->dispatchEvent(evt);
-                return true;
+                evt->targetView = window->findEventTarget(evt);
+                break;
             }
+        }
+        if (tappedView_) {
+            tappedView_->dispatchEvent(evt);
+            return true;
+        } else if (evt->targetView) {
+            evt->targetView->dispatchEvent(evt);
+            return true;
         }
     }
     // TODO(jwf): dispatch keyboard event when we have key windows

@@ -11,11 +11,11 @@ class Rect {
 public:
 
     Rect()
-            : origin(Point()), size(Size())
+            : origin(Point(0, 0)), size(Size(0, 0))
     {}
 
     Rect(Size size_)
-            : origin(Point()), size(size_)
+            : origin(Point(0, 0)), size(size_)
     {}
 
     Rect(float x, float y, float width, float height)

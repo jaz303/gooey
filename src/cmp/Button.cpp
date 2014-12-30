@@ -10,7 +10,7 @@ Button::Button(Rect rect)
 {
 }
 
-void Button::render(DrawingContext *ctx, Rect rect)
+void Button::render(DrawingContext *ctx, Rect invalidRect)
 {
     if (pressed_) {
         ctx->setFill(1.0f, 0.5f, 0.2f);
@@ -30,7 +30,7 @@ void Button::dispatchEvent(Event *evt)
             break;
         case SDL_MOUSEBUTTONUP:
             pressed_ = false;
-            if (rect_.contains(evt->windowOffset)) {
+            if (evt->targetView == this) {
                 std::cout << "mouse up inside!" << std::endl;
             }
             std::cout << "so: " << evt->screenOffset << std::endl;

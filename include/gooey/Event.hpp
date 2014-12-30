@@ -12,8 +12,23 @@ struct Event {
 
     View* targetView;
 
+    /*
+     * Offset of event within screen.
+     * For gooey's purposes, "screen" is an SDL window.
+     * Only valid for isSpatial() events
+     */
     Point screenOffset;
+
+    /*
+     * Offset of event within target window.
+     * Only valid for isSpatial() events where targetView != 0
+     */
     Point windowOffset;
+
+    /*
+     * Offset of event within target view.
+     * Only valid for isSpatial() events where targetView != 0
+     */
     Point viewOffset;
 
     /*

@@ -12,7 +12,7 @@ class Button : public View {
 public:
     Button(Rect rect);
 
-    void render(DrawingContext *ctx, Rect rect);
+    void render(DrawingContext *ctx, Rect invalidRect);
 
     virtual void dispatchEvent(Event *evt) override;
 

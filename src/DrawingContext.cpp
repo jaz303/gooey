@@ -27,6 +27,9 @@ void DrawingContext::setSurface(SDL_Surface *surface)
                 surface->h,
                 surface->pitch
         );
+        // TODO(jwf): should we attempt to maintain any cairo state?
+        // (or is it possible to simply rebind the cairo context to
+        // a new surface?)
         cairo_ = cairo_create(cairoSurface_);
     }
 }

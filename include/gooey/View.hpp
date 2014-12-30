@@ -21,7 +21,26 @@ public:
     inline float width() const { return rect_.size.width; }
     inline float height() const { return rect_.size.height; }
 
-    virtual void render(DrawingContext *ctx, Rect rect);
+    virtual void render(DrawingContext *ctx, Rect invalidRect);
+
+    /*
+     * Returns the view, or subview, targeted by the given event.
+     *
+     * `evt` will have been preprocessed such that its `viewOffset`
+     * member contains the correct offset of the event relative to
+     * this view's `rect()`.
+     *
+     * For non-container views, this method should simply return `this`.
+     *
+     * For container views, this method should return the appropriate
+     * subview, taking into account any container-specific functionality
+     * (e.g. scrolling, panel visibility). If the event doesn't target
+     * a subview (e.g. there was a click on the background of a toolbar
+     * rather than an internal button), this method should return `this`.
+     * `evt->viewOffset` must be updated such that is correct relative
+     * to the returned view.
+     */
+    virtual View* findEventTarget(Event *evt);
     virtual void dispatchEvent(Event *evt);
 
 protected:

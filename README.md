@@ -15,7 +15,7 @@ Cairo docs: http://cairographics.org/documentation/
 ### Next Up
 
   - [x] Event capturing e.g. for handling clicks/drags
-  - [ ] Decide how coordinate system should work for nested views
+  - [x] Decide how coordinate system should work for nested views
   - [ ] Container (toolbar)
   - [ ] Layout manager for toolbar
   - [ ] Knob

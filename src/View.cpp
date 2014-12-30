@@ -9,7 +9,6 @@ using namespace gooey;
 View::View(Rect rect)
     : rect_(rect)
 {
-
 }
 
 Window* View::window() const
@@ -27,8 +26,13 @@ Rect View::rect() const
     return rect_;
 }
 
-void View::render(DrawingContext *ctx, Rect rect)
+void View::render(DrawingContext *ctx, Rect invalidRect)
 {
+}
+
+View* View::findEventTarget(Event *evt)
+{
+    return this;
 }
 
 void View::dispatchEvent(Event *evt)

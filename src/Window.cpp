@@ -76,17 +76,17 @@ void Window::render()
     for (auto view : views_) {
         context_.loadIdentity();
         context_.translate(view->x(), view->y());
-        view->render(&context_, view->rect());
+        view->render(&context_, Rect());
     }
 }
 
-void Window::dispatchEvent(Event *evt)
+View* Window::findEventTarget(Event *evt)
 {
     for (auto iter = views_.rbegin(); iter != views_.rend(); ++iter) {
         View *view = (*iter);
         if (view->rect().contains(evt->windowOffset, &evt->viewOffset)) {
-            view->dispatchEvent(evt);
-            return;
+            return view->findEventTarget(evt);
         }
     }
+    return 0;
 }
