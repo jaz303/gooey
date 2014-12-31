@@ -25,7 +25,7 @@ Cairo docs: http://cairographics.org/documentation/
   - [x] Panel (background color, subviews)
   - [x] Split view - groundwork
   - [ ] Split view - drag-resize 
-  - [ ] Use clipping when rendering containers
+  - [x] Use clipping when rendering containers
   - [ ] SDL container view
   - [ ] Knob
   - [ ] Slider
