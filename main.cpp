@@ -34,7 +34,11 @@ int main() {
     sp1->setLeftView(p2);
 
     Button *b3 = new Button(Rect(10, 10, 50, 50));
+    b3->setLabel("button 3");
+
     Button *b4 = new Button(Rect(-40, 100, 100, 50));
+    b4->setLabel("button 4");
+
     p2->addSubView(b3);
     p2->addSubView(b4);
 
@@ -42,7 +46,11 @@ int main() {
     sp1->setRightView(p3);
 
     Button *b1 = new Button(Rect(10, 10, 200, 40));
+    b1->setLabel("button 1");
+
     Button *b2 = new Button(Rect(220, 10, 70, 40));
+    b2->setLabel("button 2");
+
     p1->addSubView(b1);
     p1->addSubView(b2);
 //

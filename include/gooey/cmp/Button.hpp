@@ -4,6 +4,7 @@
 #include "gooey/fwd.hpp"
 #include "gooey/View.hpp"
 #include "gooey/geom/Rect.hpp"
+#include <string>
 
 namespace gooey {
 
@@ -12,6 +13,9 @@ class Button : public View {
 public:
     Button(Rect rect);
 
+    void setLabel(const char *newLabel);
+    void setLabel(std::string newLabel);
+
     void render(DrawingContext *ctx, Rect invalidRect);
 
     virtual void dispatchEvent(Event *evt) override;
@@ -19,6 +23,7 @@ public:
 private:
 
     bool pressed_;
+    std::string label_;
 
 };
 

@@ -26,6 +26,7 @@ Cairo docs: http://cairographics.org/documentation/
   - [x] Split view - groundwork
   - [x] Split view - drag-resize 
   - [x] Use clipping when rendering containers
+  - [x] Text rendering spike
   - [ ] SDL container view
   - [ ] Knob
   - [ ] Slider

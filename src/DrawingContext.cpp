@@ -31,6 +31,12 @@ void DrawingContext::setSurface(SDL_Surface *surface)
         // (or is it possible to simply rebind the cairo context to
         // a new surface?)
         cairo_ = cairo_create(cairoSurface_);
+        cairo_select_font_face(
+                cairo_,
+                "sans-serif",
+                CAIRO_FONT_SLANT_NORMAL,
+                CAIRO_FONT_WEIGHT_NORMAL
+        );
     }
 }
 
@@ -104,6 +110,20 @@ void DrawingContext::fillRect(Rect rect)
 void DrawingContext::fillRect(float x, float y, float w, float h)
 {
     cairo_rectangle(cairo_, x, y, w, h);
+    cairo_fill(cairo_);
+}
+
+void DrawingContext::setFontSize(float newFontSize)
+{
+    cairo_set_font_size(cairo_, newFontSize);
+}
+
+void DrawingContext::fillTextCentered(std::string text, float cx, float cy)
+{
+    cairo_text_extents_t extents;
+    cairo_text_extents(cairo_, text.c_str(), &extents);
+    cairo_move_to(cairo_, cx - extents.width / 2, cy + extents.height / 2);
+    cairo_show_text(cairo_, text.c_str());
     cairo_fill(cairo_);
 }
 

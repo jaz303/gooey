@@ -5,6 +5,7 @@
 #include "gooey/geom/Rect.hpp"
 #include <SDL2/SDL.h>
 #include <cairo/cairo.h>
+#include <string>
 
 namespace gooey {
 
@@ -35,6 +36,9 @@ public:
 
     void fillRect(Rect rect);
     void fillRect(float x, float y, float w, float h);
+
+    void setFontSize(float newFontSize);
+    void fillTextCentered(std::string text, float cx, float cy);
 
 private:
 
