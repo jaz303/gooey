@@ -24,7 +24,7 @@ Cairo docs: http://cairographics.org/documentation/
   - [x] Decide how coordinate system should work for nested views
   - [x] Panel (background color, subviews)
   - [x] Split view - groundwork
-  - [ ] Split view - drag-resize 
+  - [x] Split view - drag-resize 
   - [x] Use clipping when rendering containers
   - [ ] SDL container view
   - [ ] Knob

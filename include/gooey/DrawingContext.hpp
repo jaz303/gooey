@@ -31,6 +31,7 @@ public:
     void loadIdentity();
 
     void setFill(float r, float g, float b);
+    void setFill(float r, float g, float b, float a);
 
     void fillRect(Rect rect);
     void fillRect(float x, float y, float w, float h);

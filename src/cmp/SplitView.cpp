@@ -26,6 +26,14 @@ void SplitView::setDividerSize(float newDividerSize)
     updateChildRects(true, true);
 }
 
+void SplitView::setDividerPosition(float newDividerPosition)
+{
+    splitRatio_ = newDividerPosition / (width() - dividerSize());
+    if (splitRatio_ < 0) splitRatio_ = 0;
+    if (splitRatio_ > 1) splitRatio_ = 1;
+    updateChildRects(true, true);
+}
+
 void SplitView::setLeftView(View *view)
 {
     if (firstView_) {
@@ -54,32 +62,37 @@ void SplitView::setRightView(View *view)
 
 void SplitView::render(DrawingContext *ctx, Rect invalidRect)
 {
-    // NOTE(jwf): this is a little bodge to prevent the superview's
-    // background color haloing the divider. we just make the divider
-    // a pixel wider at each side to fully obscure the background
-    // color.
     float dp = dividerPosition();
     ctx->setFill(0.5f, 0.5f, 0.5f);
-    ctx->fillRect(dp - 1.0f, 0, dividerSize() + 2.0f, height());
+    ctx->fillRect(dp, 0, dividerSize(), height());
 
     Rect viewRect;
 
     if (firstView_) {
-        viewRect = firstView_->rect();
-        ctx->translate(viewRect.origin.x, viewRect.origin.y);
-        firstView_->render(ctx, Rect());
-        ctx->translate(-viewRect.origin.x, -viewRect.origin.y);
+        if (splitRatio_ > 0) {
+            viewRect = firstView_->rect();
+            ctx->translate(viewRect.origin.x, viewRect.origin.y);
+            firstView_->render(ctx, Rect());
+            ctx->translate(-viewRect.origin.x, -viewRect.origin.y);
+        }
     } else {
         // TODO(jwf): solid fill
     }
 
     if (secondView_) {
-        viewRect = secondView_->rect();
-        ctx->translate(viewRect.origin.x, viewRect.origin.y);
-        secondView_->render(ctx, Rect());
-        ctx->translate(-viewRect.origin.x, -viewRect.origin.y);
+        if (splitRatio_ < 1) {
+            viewRect = secondView_->rect();
+            ctx->translate(viewRect.origin.x, viewRect.origin.y);
+            secondView_->render(ctx, Rect());
+            ctx->translate(-viewRect.origin.x, -viewRect.origin.y);
+        }
     } else {
         // TODO(jwf): solid fill
+    }
+
+    if (resizing_) {
+        ctx->setFill(1.0f, 0.5f, 0.5f, 0.75f);
+        ctx->fillRect(resizeCurrentOffset_, 0.0f, dividerSize(), height());
     }
 }
 
@@ -107,24 +120,28 @@ void SplitView::dispatchEvent(Event *evt)
         {
             auto dp = dividerPosition();
             if (evt->viewOffset.x >= dp && evt->viewOffset.x < (dp + dividerSize())) {
-                std::cout << "mouse down on divider!" << std::endl;
                 resizing_ = true;
+                resizeCurrentOffset_ = dp;
+                resizeStartOffset_ = dp;
+                resizeScreenStartOffset_ = evt->screenOffset.x;
                 startTappingEvents();
-                // TODO: stash offsets etc
             }
             break;
         }
         case SDL_MOUSEMOTION:
         {
             if (resizing_) {
-                std::cout << "do resize stuff!" << std::endl;
+                float newOffset = resizeStartOffset_ + (evt->screenOffset.x - resizeScreenStartOffset_);
+                if (newOffset < 0) newOffset = 0;
+                if (newOffset > width() - dividerSize()) newOffset = width() - dividerSize();
+                resizeCurrentOffset_ = newOffset;
             }
             break;
         };
         case SDL_MOUSEBUTTONUP:
         {
             if (resizing_) {
-                std::cout << "resize complete!" << std::endl;
+                setDividerPosition(resizeCurrentOffset_);
                 resizing_ = false;
                 stopTappingEvents();
             }
@@ -137,14 +154,16 @@ void SplitView::updateChildRects(bool c1, bool c2)
 {
     // TODO(jwf): handle case where not enough space
 
-    float dp = dividerPosition();
+    float availableSpace = width() - dividerSize();
+    float firstWidth = splitRatio_ * availableSpace;
+    float secondWidth = (1 - splitRatio_) * availableSpace;
 
     if (c1 && firstView_) {
-        firstView_->setRect(Rect(0, 0, dp, height()));
+        firstView_->setRect(Rect(0, 0, firstWidth, height()));
     }
 
     if (c2 && secondView_) {
-        float left = dp + dividerSize();
-        secondView_->setRect(Rect(left, 0, width() - left, height()));
+        float left = firstWidth + dividerSize();
+        secondView_->setRect(Rect(left, 0, secondWidth, height()));
     }
 }

@@ -18,6 +18,7 @@ public:
 
     inline float dividerSize() const { return dividerSize_; }
     void setDividerSize(float newDividerSize);
+    void setDividerPosition(float newDividerPosition);
 
     void setLeftView(View *view);
     void setRightView(View *view);
@@ -34,13 +35,14 @@ private:
     View *firstView_;
     View *secondView_;
     bool resizing_;
+    float resizeCurrentOffset_;
+    float resizeStartOffset_;
+    float resizeScreenStartOffset_;
 
     void updateChildRects(bool c1, bool c2);
 
     inline float dividerPosition() const {
-        float dividerMidPoint = width() * splitRatio_;
-        float dividerLeft = dividerMidPoint - (dividerSize_ * 0.5f);
-        return dividerLeft;
+        return (width() - dividerSize()) * splitRatio_;
     }
 
 };

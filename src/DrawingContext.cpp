@@ -91,6 +91,10 @@ void DrawingContext::setFill(float r, float g, float b)
     cairo_set_source_rgb(cairo_, r, g, b);
 }
 
+void DrawingContext::setFill(float r, float g, float b, float a) {
+    cairo_set_source_rgba(cairo_, r, g, b, a);
+}
+
 void DrawingContext::fillRect(Rect rect)
 {
     cairo_rectangle(cairo_, rect.origin.x, rect.origin.y, rect.size.width, rect.size.height);
