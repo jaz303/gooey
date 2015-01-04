@@ -28,7 +28,7 @@ Cairo docs: http://cairographics.org/documentation/
   - [x] Use clipping when rendering containers
   - [x] Text rendering spike
   - [x] Label
-  - [ ] SDL container view
+  - [x] SDL container view
   - [ ] Knob
   - [ ] Slider
   - [ ] Layout manager for toolbar
@@ -39,6 +39,7 @@ This leaves: text inputs, check boxes, radio buttons, floating windows, key wind
 ### Deferred
 
   - [ ] Use HW accelerated rendering (i.e. `SDL_Renderer`)
+  - [ ] SDLSurfaceView should support scaling in addition to clipping
 
 ## General Deficiencies
 

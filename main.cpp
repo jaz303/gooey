@@ -20,7 +20,7 @@ int main() {
    // SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
     // test surface
-    SDL_Surface *animation = SDL_CreateRGBSurface(0, 600, 600, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
+    SDL_Surface *animation = SDL_CreateRGBSurface(0, 256, 256, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
 
     WindowManager *wm = new WindowManager(window, 0);
 
@@ -66,6 +66,8 @@ int main() {
 //    win->addView(b2);
 
 
+    int xpos = 0;
+    int ypos = 0;
 
     bool running = true;
     while (running) {
@@ -92,7 +94,15 @@ int main() {
         for (int j = 0; j < animation->h; ++j) {
             uint32_t *row = (uint32_t*)pixels;
             for (int i = 0; i < animation->w; ++i) {
-                row[i] =  0x00FF0000;
+                if (i < 5) {
+                    row[i] = 0xFF000000;
+                } else if (i == animation->w / 2 && j == animation->h / 2) {
+                    row[i] = 0xFFFFFFFF;
+                } else {
+                    uint8_t r = (i + xpos);
+                    uint8_t g = (j + ypos);
+                    row[i] = 0xFF000000 | ((uint32_t)r << 16) | ((uint32_t)g << 8);
+                }
             }
             pixels += animation->pitch;
         }
@@ -100,6 +110,9 @@ int main() {
         wm->render();
 
         SDL_Delay(1000 / 60);
+
+        xpos++;
+        ypos++;
 
     }
 

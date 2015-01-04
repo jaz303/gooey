@@ -136,7 +136,12 @@ void DrawingContext::fillTextVerticallyCentered(std::string text, float cx, floa
 
 void DrawingContext::drawSurface(cairo_surface_t *surface, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh)
 {
+    float imageOffsetX = dx - sx;
+    float imageOffsetY = dy - sy;
 
+    cairo_set_source_surface(cairo_, surface, imageOffsetX, imageOffsetY);
+    cairo_rectangle(cairo_, dx, dy, dw, dh);
+    cairo_fill(cairo_);
 }
 
 //

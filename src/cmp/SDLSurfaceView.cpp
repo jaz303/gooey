@@ -66,22 +66,30 @@ void SDLSurfaceView::render(DrawingContext *ctx, Rect invalidRect)
     float sx, sy, sw, sh;
     float dx, dy, dw, dh;
 
-    if (surface_->w <= width()) {
+    float widthDelta = surface_->w - width();
+
+    if (widthDelta < 0) {
         sx = 0;
         sw = surface_->w;
         dx = (width() * 0.5f) - (sw * 0.5f);
         dw = sw;
     } else {
-        dw = sw = 0.0f;
+        dx = 0;
+        dw = sw = width();
+        sx = widthDelta * 0.5f;
     }
 
-    if (surface_->h <= height()) {
+    float heightDelta = surface_->h - height();
+
+    if (heightDelta < 0) {
         sy = 0;
         sh = surface_->h;
         dy = (height() * 0.5f) - (sh * 0.5f);
         dh = sh;
     } else {
-        dh = sh = 0.0f;
+        dy = 0;
+        dh = sh = height();
+        sy = heightDelta * 0.5f;
     }
 
     if (dw == 0 || dh == 0) {
