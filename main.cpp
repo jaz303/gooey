@@ -33,7 +33,7 @@ int main() {
     Panel *p2 = new Panel(Rect());
     sp1->setLeftView(p2);
 
-    Button *b3 = new Button(Rect(10, 10, 50, 50));
+    Button *b3 = new Button(Rect(10, 10, 30, 50));
     b3->setLabel("button 3");
 
     Button *b4 = new Button(Rect(-40, 100, 100, 50));
