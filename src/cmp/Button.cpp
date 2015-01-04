@@ -51,11 +51,8 @@ void Button::dispatchEvent(Event *evt)
         case SDL_MOUSEBUTTONUP:
             pressed_ = false;
             if (evt->targetView == this) {
-                std::cout << "mouse up inside!" << std::endl;
+                // TODO(jwf): handle click
             }
-            std::cout << "so: " << evt->screenOffset << std::endl;
-            std::cout << "wo: " << evt->windowOffset << std::endl;
-            std::cout << "vo: " << evt->viewOffset << std::endl;
             stopTappingEvents();
             break;
     }
