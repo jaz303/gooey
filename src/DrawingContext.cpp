@@ -124,7 +124,6 @@ void DrawingContext::fillTextCentered(std::string text, float cx, float cy)
     cairo_text_extents(cairo_, text.c_str(), &extents);
     cairo_move_to(cairo_, cx - extents.width / 2, cy + extents.height / 2);
     cairo_show_text(cairo_, text.c_str());
-    cairo_fill(cairo_);
 }
 
 //
