@@ -18,6 +18,7 @@ set(SOURCE_FILES
     include/gooey/WindowManager.hpp
 
     include/gooey/cmp/Button.hpp
+    include/gooey/cmp/Label.hpp
     include/gooey/cmp/Panel.hpp
     include/gooey/cmp/SplitView.hpp
 
@@ -30,6 +31,7 @@ set(SOURCE_FILES
     src/WindowManager.cpp
 
     src/cmp/Button.cpp
+    src/cmp/Label.cpp
     src/cmp/Panel.cpp
     src/cmp/SplitView.cpp
 

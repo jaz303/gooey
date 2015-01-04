@@ -126,6 +126,14 @@ void DrawingContext::fillTextCentered(std::string text, float cx, float cy)
     cairo_show_text(cairo_, text.c_str());
 }
 
+void DrawingContext::fillTextVerticallyCentered(std::string text, float cx, float cy)
+{
+    cairo_text_extents_t extents;
+    cairo_text_extents(cairo_, text.c_str(), &extents);
+    cairo_move_to(cairo_, cx, cy + extents.height / 2);
+    cairo_show_text(cairo_, text.c_str());
+}
+
 //
 // Private
 

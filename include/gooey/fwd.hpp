@@ -16,6 +16,7 @@ class Window;
 class WindowManager;
 
 class Button;
+class Label;
 class Panel;
 class SplitView;
 

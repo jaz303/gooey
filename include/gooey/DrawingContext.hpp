@@ -39,6 +39,7 @@ public:
 
     void setFontSize(float newFontSize);
     void fillTextCentered(std::string text, float cx, float cy);
+    void fillTextVerticallyCentered(std::string text, float cx, float cy);
 
 private:
 

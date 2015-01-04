@@ -51,8 +51,12 @@ int main() {
     Button *b2 = new Button(Rect(220, 10, 70, 40));
     b2->setLabel("button 2");
 
+    Label *l1 = new Label(Rect(300, 10, 100, 40));
+    l1->setLabel("test label");
+
     p1->addSubView(b1);
     p1->addSubView(b2);
+    p1->addSubView(l1);
 //
 //    win->addView(b1);
 //    win->addView(b2);

@@ -27,13 +27,14 @@ Cairo docs: http://cairographics.org/documentation/
   - [x] Split view - drag-resize 
   - [x] Use clipping when rendering containers
   - [x] Text rendering spike
+  - [x] Label
   - [ ] SDL container view
   - [ ] Knob
   - [ ] Slider
   - [ ] Layout manager for toolbar
   
 
-This leaves: text inputs, labels, check boxes, radio buttons, floating windows, key windows
+This leaves: text inputs, check boxes, radio buttons, floating windows, key windows
 
 ### Deferred
 
