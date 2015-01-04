@@ -19,6 +19,9 @@ int main() {
     //SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
    // SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
+    // test surface
+    SDL_Surface *animation = SDL_CreateRGBSurface(0, 600, 600, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
+
     WindowManager *wm = new WindowManager(window, 0);
 
     Window *win = wm->createRootWindow();
@@ -42,8 +45,9 @@ int main() {
     p2->addSubView(b3);
     p2->addSubView(b4);
 
-    Panel *p3 = new Panel(Rect());
-    sp1->setRightView(p3);
+    SDLSurfaceView *surfaceView = new SDLSurfaceView(Rect());
+    surfaceView->setSurface(animation);
+    sp1->setRightView(surfaceView);
 
     Button *b1 = new Button(Rect(10, 10, 200, 40));
     b1->setLabel("button 1");
@@ -60,6 +64,8 @@ int main() {
 //
 //    win->addView(b1);
 //    win->addView(b2);
+
+
 
     bool running = true;
     while (running) {
@@ -80,6 +86,15 @@ int main() {
             } else if (!wm->dispatchEvent(&evt)) {
                 // event wasn't handled by the window manager
             }
+        }
+
+        uint8_t *pixels = (uint8_t*)animation->pixels;
+        for (int j = 0; j < animation->h; ++j) {
+            uint32_t *row = (uint32_t*)pixels;
+            for (int i = 0; i < animation->w; ++i) {
+                row[i] =  0x00FF0000;
+            }
+            pixels += animation->pitch;
         }
 
         wm->render();

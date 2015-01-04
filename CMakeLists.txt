@@ -20,6 +20,7 @@ set(SOURCE_FILES
     include/gooey/cmp/Button.hpp
     include/gooey/cmp/Label.hpp
     include/gooey/cmp/Panel.hpp
+    include/gooey/cmp/SDLSurfaceView.hpp
     include/gooey/cmp/SplitView.hpp
 
     include/gooey/fwd.hpp
@@ -33,6 +34,7 @@ set(SOURCE_FILES
     src/cmp/Button.cpp
     src/cmp/Label.cpp
     src/cmp/Panel.cpp
+    src/cmp/SDLSurfaceView.cpp
     src/cmp/SplitView.cpp
 
     src/debug.cpp

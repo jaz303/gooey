@@ -10,11 +10,12 @@ class View {
 
 public:
     View(Rect rect);
+    virtual ~View();
 
     inline Window* window() const { return window_; };
     void setWindow(Window *window);
 
-    Rect rect() const;
+    inline Rect rect() const { return rect_; };
     virtual void setRect(Rect rect);
 
     inline float x() const { return rect_.origin.x; }

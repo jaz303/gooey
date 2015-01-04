@@ -41,6 +41,9 @@ public:
     void fillTextCentered(std::string text, float cx, float cy);
     void fillTextVerticallyCentered(std::string text, float cx, float cy);
 
+    // TODO(jwf): do we need our own surface abstraction?
+    void drawSurface(cairo_surface_t *surface, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh);
+
 private:
 
     void teardown();

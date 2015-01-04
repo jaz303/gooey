@@ -11,14 +11,13 @@ View::View(Rect rect)
 {
 }
 
+View::~View()
+{
+}
+
 void View::setWindow(Window *window)
 {
     window_ = window;
-}
-
-Rect View::rect() const
-{
-    return rect_;
 }
 
 void View::setRect(Rect rect)

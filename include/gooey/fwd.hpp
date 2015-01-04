@@ -18,6 +18,7 @@ class WindowManager;
 class Button;
 class Label;
 class Panel;
+class SDLSurfaceView;
 class SplitView;
 
 }

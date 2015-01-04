@@ -134,6 +134,11 @@ void DrawingContext::fillTextVerticallyCentered(std::string text, float cx, floa
     cairo_show_text(cairo_, text.c_str());
 }
 
+void DrawingContext::drawSurface(cairo_surface_t *surface, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh)
+{
+
+}
+
 //
 // Private
 
