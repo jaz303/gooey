@@ -31,6 +31,7 @@ int main() {
     win->addView(p1);
 
     SplitView *sp1 = new SplitView(Rect(10, 80, 620, 410));
+    sp1->setHorizontal();
     win->addView(sp1);
 
     Panel *p2 = new Panel(Rect());

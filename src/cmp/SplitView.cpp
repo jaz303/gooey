@@ -6,6 +6,7 @@ using namespace gooey;
 
 SplitView::SplitView(Rect rect)
     : View(rect)
+    , vertical_(true)
     , dividerSize_(10)
     , splitRatio_(0.33333f)
     , firstView_(0)
@@ -20,6 +21,19 @@ void SplitView::setRect(Rect rect)
     updateChildRects(true, true);
 }
 
+void SplitView::setVertical()
+{
+    vertical_ = true;
+    updateChildRects(true, true);
+}
+
+void SplitView::setHorizontal()
+{
+    vertical_ = false;
+    updateChildRects(true, true);
+}
+
+
 void SplitView::setDividerSize(float newDividerSize)
 {
     dividerSize_ = newDividerSize;
@@ -28,7 +42,8 @@ void SplitView::setDividerSize(float newDividerSize)
 
 void SplitView::setDividerPosition(float newDividerPosition)
 {
-    splitRatio_ = newDividerPosition / (width() - dividerSize());
+    float referenceDim = vertical_ ? width() : height();
+    splitRatio_ = newDividerPosition / (referenceDim - dividerSize());
     if (splitRatio_ < 0) splitRatio_ = 0;
     if (splitRatio_ > 1) splitRatio_ = 1;
     updateChildRects(true, true);
@@ -64,7 +79,12 @@ void SplitView::render(DrawingContext *ctx, Rect invalidRect)
 {
     float dp = dividerPosition();
     ctx->setFill(0.5f, 0.5f, 0.5f);
-    ctx->fillRect(dp, 0, dividerSize(), height());
+
+    if (vertical_) {
+        ctx->fillRect(dp, 0, dividerSize(), height());
+    } else {
+        ctx->fillRect(0, dp, width(), dividerSize());
+    }
 
     Rect viewRect;
 
@@ -92,7 +112,11 @@ void SplitView::render(DrawingContext *ctx, Rect invalidRect)
 
     if (resizing_) {
         ctx->setFill(1.0f, 0.5f, 0.5f, 0.75f);
-        ctx->fillRect(resizeCurrentOffset_, 0.0f, dividerSize(), height());
+        if (vertical_) {
+            ctx->fillRect(resizeCurrentOffset_, 0.0f, dividerSize(), height());
+        } else {
+            ctx->fillRect(0.0f, resizeCurrentOffset_, width(), dividerSize());
+        }
     }
 }
 
@@ -101,11 +125,12 @@ void SplitView::render(DrawingContext *ctx, Rect invalidRect)
 View* SplitView::findEventTarget(Event *evt)
 {
     auto dp = dividerPosition();
+    auto rc = vertical_ ? evt->viewOffset.x : evt->viewOffset.y;
 
-    if (firstView_ && evt->viewOffset.x < dp) {
+    if (firstView_ && rc < dp) {
         evt->viewOffset = firstView_->rect().offsetOf(evt->viewOffset);
         return firstView_->findEventTarget(evt);
-    } else if (secondView_ && evt->viewOffset.x >= (dp + dividerSize())) {
+    } else if (secondView_ && rc >= (dp + dividerSize())) {
         evt->viewOffset = secondView_->rect().offsetOf(evt->viewOffset);
         return secondView_->findEventTarget(evt);
     } else {
@@ -115,15 +140,29 @@ View* SplitView::findEventTarget(Event *evt)
 
 void SplitView::dispatchEvent(Event *evt)
 {
+    float offsetComponent;
+    float screenOffsetComponent;
+    float maxPosition;
+
+    if (vertical_) {
+        offsetComponent = evt->viewOffset.x;
+        screenOffsetComponent = evt->screenOffset.x;
+        maxPosition = width();
+    } else {
+        offsetComponent = evt->viewOffset.y;
+        screenOffsetComponent = evt->screenOffset.y;
+        maxPosition = height();
+    }
+
     switch (evt->type()) {
         case SDL_MOUSEBUTTONDOWN:
         {
             auto dp = dividerPosition();
-            if (evt->viewOffset.x >= dp && evt->viewOffset.x < (dp + dividerSize())) {
+            if (offsetComponent >= dp && offsetComponent < (dp + dividerSize())) {
                 resizing_ = true;
                 resizeCurrentOffset_ = dp;
                 resizeStartOffset_ = dp;
-                resizeScreenStartOffset_ = evt->screenOffset.x;
+                resizeScreenStartOffset_ = screenOffsetComponent;
                 startTappingEvents();
             }
             break;
@@ -131,9 +170,9 @@ void SplitView::dispatchEvent(Event *evt)
         case SDL_MOUSEMOTION:
         {
             if (resizing_) {
-                float newOffset = resizeStartOffset_ + (evt->screenOffset.x - resizeScreenStartOffset_);
+                float newOffset = resizeStartOffset_ + (screenOffsetComponent - resizeScreenStartOffset_);
                 if (newOffset < 0) newOffset = 0;
-                if (newOffset > width() - dividerSize()) newOffset = width() - dividerSize();
+                if (newOffset > maxPosition - dividerSize()) newOffset = maxPosition - dividerSize();
                 resizeCurrentOffset_ = newOffset;
             }
             break;
@@ -154,16 +193,25 @@ void SplitView::updateChildRects(bool c1, bool c2)
 {
     // TODO(jwf): handle case where not enough space
 
-    float availableSpace = width() - dividerSize();
-    float firstWidth = splitRatio_ * availableSpace;
-    float secondWidth = (1 - splitRatio_) * availableSpace;
+    float availableSpace = (vertical_ ? width() : height()) - dividerSize();
+    float firstSize = splitRatio_ * availableSpace;
+    float secondSize = (1 - splitRatio_) * availableSpace;
 
     if (c1 && firstView_) {
-        firstView_->setRect(Rect(0, 0, firstWidth, height()));
+        if (vertical_) {
+            firstView_->setRect(Rect(0, 0, firstSize, height()));
+        } else {
+            firstView_->setRect(Rect(0, 0, width(), firstSize));
+        }
+
     }
 
     if (c2 && secondView_) {
-        float left = firstWidth + dividerSize();
-        secondView_->setRect(Rect(left, 0, secondWidth, height()));
+        float start = firstSize + dividerSize();
+        if (vertical_) {
+            secondView_->setRect(Rect(start, 0, secondSize, height()));
+        } else {
+            secondView_->setRect(Rect(0, start, width(), secondSize));
+        }
     }
 }

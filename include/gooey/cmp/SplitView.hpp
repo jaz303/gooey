@@ -16,6 +16,9 @@ public:
 
     virtual void setRect(Rect rect) override;
 
+    void setVertical();
+    void setHorizontal();
+
     inline float dividerSize() const { return dividerSize_; }
     void setDividerSize(float newDividerSize);
     void setDividerPosition(float newDividerPosition);
@@ -30,6 +33,7 @@ public:
 
 private:
 
+    bool vertical_;
     float dividerSize_;
     float splitRatio_;
     View *firstView_;
@@ -42,7 +46,8 @@ private:
     void updateChildRects(bool c1, bool c2);
 
     inline float dividerPosition() const {
-        return (width() - dividerSize()) * splitRatio_;
+        float referenceDim = vertical_ ? width() : height();
+        return (referenceDim - dividerSize()) * splitRatio_;
     }
 
 };
