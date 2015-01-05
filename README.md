@@ -40,6 +40,7 @@ This leaves: text inputs, check boxes, radio buttons, floating windows, key wind
 
   - [ ] Use HW accelerated rendering (i.e. `SDL_Renderer`)
   - [ ] SDLSurfaceView should support scaling in addition to clipping
+  - [ ] Migrate from cairo's "toy" text API
 
 ## General Deficiencies
 
