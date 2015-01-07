@@ -47,6 +47,10 @@ This leaves: text inputs, check boxes, radio buttons, floating windows, key wind
   - Raw pointers are used liberally. They should be replaced with smart pointers.
   - No consideration has yet been given whatsoever to setting the cursor.
   
+## Thoughts
+
+  - Should explore whether to make event-tapping 2-tiered, i.e. `WindowManager` taps events to `Window` then `Window` taps events to `View`. The same approach should be adopted for key events, when we have them.
+  
 ## Limitations
 
   - Assumes ARGB32
