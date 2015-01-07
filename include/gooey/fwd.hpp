@@ -16,6 +16,7 @@ class Window;
 class WindowManager;
 
 class Button;
+class Knob;
 class Label;
 class Panel;
 class SDLSurfaceView;

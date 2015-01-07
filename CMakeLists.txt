@@ -18,6 +18,7 @@ set(SOURCE_FILES
     include/gooey/WindowManager.hpp
 
     include/gooey/cmp/Button.hpp
+    include/gooey/cmp/Knob.hpp
     include/gooey/cmp/Label.hpp
     include/gooey/cmp/Panel.hpp
     include/gooey/cmp/SDLSurfaceView.hpp
@@ -27,11 +28,13 @@ set(SOURCE_FILES
     include/gooey/gooey.hpp
 
     src/DrawingContext.cpp
+    src/Event.cpp
     src/View.cpp
     src/Window.cpp
     src/WindowManager.cpp
 
     src/cmp/Button.cpp
+    src/cmp/Knob.cpp
     src/cmp/Label.cpp
     src/cmp/Panel.cpp
     src/cmp/SDLSurfaceView.cpp

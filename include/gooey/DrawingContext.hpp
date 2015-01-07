@@ -31,11 +31,26 @@ public:
     void rotate(float theta);
     void loadIdentity();
 
+    void beginPath();
+
     void setFill(float r, float g, float b);
     void setFill(float r, float g, float b, float a);
 
+    void setStroke(float r, float g, float b);
+    void setStroke(float r, float g, float b, float a);
+    void setLineWidth(float w);
+
+    void moveTo(float x, float y);
+    void lineTo(float x, float y);
+    void arc(float cx, float cy, float radius, float angle1, float angle2);
+
     void fillRect(Rect rect);
     void fillRect(float x, float y, float w, float h);
+
+    void stroke();
+    void fill();
+    void strokeFill();
+    void fillStroke();
 
     void setFontSize(float newFontSize);
     void fillTextCentered(std::string text, float cx, float cy);

@@ -92,6 +92,11 @@ void DrawingContext::loadIdentity()
     cairo_identity_matrix(cairo_);
 }
 
+void DrawingContext::beginPath()
+{
+    cairo_new_path(cairo_);
+}
+
 void DrawingContext::setFill(float r, float g, float b)
 {
     cairo_set_source_rgb(cairo_, r, g, b);
@@ -99,6 +104,32 @@ void DrawingContext::setFill(float r, float g, float b)
 
 void DrawingContext::setFill(float r, float g, float b, float a) {
     cairo_set_source_rgba(cairo_, r, g, b, a);
+}
+
+void DrawingContext::setStroke(float r, float g, float b)
+{
+    cairo_set_source_rgb(cairo_, r, g, b);
+}
+
+void DrawingContext::setStroke(float r, float g, float b, float a) {
+    cairo_set_source_rgba(cairo_, r, g, b, a);
+}
+
+void DrawingContext::setLineWidth(float w) {
+    cairo_set_line_width(cairo_, w);
+}
+
+void DrawingContext::moveTo(float x, float y) {
+    cairo_move_to(cairo_, x, y);
+}
+
+void DrawingContext::lineTo(float x, float y) {
+    cairo_line_to(cairo_, x, y);
+}
+
+void DrawingContext::arc(float cx, float cy, float radius, float angle1, float angle2)
+{
+    cairo_arc(cairo_, cx, cy, radius, angle1, angle2);
 }
 
 void DrawingContext::fillRect(Rect rect)
@@ -111,6 +142,28 @@ void DrawingContext::fillRect(float x, float y, float w, float h)
 {
     cairo_rectangle(cairo_, x, y, w, h);
     cairo_fill(cairo_);
+}
+
+void DrawingContext::stroke()
+{
+    cairo_stroke(cairo_);
+}
+
+void DrawingContext::fill()
+{
+    cairo_fill(cairo_);
+}
+
+void DrawingContext::strokeFill()
+{
+    cairo_stroke_preserve(cairo_);
+    cairo_fill(cairo_);
+}
+
+void DrawingContext::fillStroke()
+{
+    cairo_fill_preserve(cairo_);
+    cairo_stroke(cairo_);
 }
 
 void DrawingContext::setFontSize(float newFontSize)

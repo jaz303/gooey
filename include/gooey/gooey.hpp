@@ -16,6 +16,7 @@
 #include "gooey/WindowManager.hpp"
 
 #include "gooey/cmp/Button.hpp"
+#include "gooey/cmp/Knob.hpp"
 #include "gooey/cmp/Label.hpp"
 #include "gooey/cmp/Panel.hpp"
 #include "gooey/cmp/SDLSurfaceView.hpp"

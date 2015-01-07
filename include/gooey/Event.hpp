@@ -60,6 +60,9 @@ struct Event {
                 || sdl.type == SDL_MOUSEBUTTONUP;
     }
 
+    Point targetTopLeftScreen() const;
+    Point targetCenterScreen() const;
+
 };
 
 }

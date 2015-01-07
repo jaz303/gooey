@@ -29,7 +29,7 @@ Cairo docs: http://cairographics.org/documentation/
   - [x] Text rendering spike
   - [x] Label
   - [x] SDL container view
-  - [ ] Knob
+  - [x] Knob
   - [ ] Slider
   - [ ] Layout manager for toolbar
   
