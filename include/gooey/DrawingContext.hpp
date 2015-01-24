@@ -2,6 +2,7 @@
 #define __GOOEY_DRAWINGCONTEXT_HPP__
 
 #include "gooey/fwd.hpp"
+#include "gooey/geom/Point.hpp"
 #include "gooey/geom/Rect.hpp"
 #include <SDL2/SDL.h>
 #include <cairo/cairo.h>
@@ -58,6 +59,14 @@ public:
 
     // TODO(jwf): do we need our own surface abstraction?
     void drawSurface(cairo_surface_t *surface, float sx, float sy, float sw, float sh, float dx, float dy, float dw, float dh);
+
+    inline SDL_Surface* sdlSurface() const { return sdlSurface_; }
+
+    Point viewToSurface(Point p) {
+        double x = p.x, y = p.y;
+        cairo_user_to_device(cairo_, &x, &y);
+        return Point(x, y);
+    }
 
 private:
 
