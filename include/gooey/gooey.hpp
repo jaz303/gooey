@@ -21,5 +21,6 @@
 #include "gooey/cmp/Panel.hpp"
 #include "gooey/cmp/SDLSurfaceView.hpp"
 #include "gooey/cmp/SplitView.hpp"
+#include "gooey/cmp/TextEditor.hpp"
 
 #endif

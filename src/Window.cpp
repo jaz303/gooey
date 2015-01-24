@@ -13,6 +13,7 @@ using namespace gooey;
 Window::Window(WindowManager *windowManager)
     : windowManager_(windowManager)
     , sdlSurface_(0)
+    , focusedView_(0)
 {
     setRect(Rect(0, 0, 100, 100));
 }
@@ -89,4 +90,11 @@ View* Window::findEventTarget(Event *evt)
         }
     }
     return 0;
+}
+
+void Window::dispatchKeyEvent(Event *evt)
+{
+    if (focusedView_) {
+        focusedView_->dispatchKeyEvent(evt);
+    }
 }

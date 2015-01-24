@@ -46,9 +46,12 @@ int main() {
     p2->addSubView(b3);
     p2->addSubView(b4);
 
-    SDLSurfaceView *surfaceView = new SDLSurfaceView(Rect());
-    surfaceView->setSurface(animation);
-    sp1->setRightView(surfaceView);
+    TextEditor *editor = new TextEditor(Rect());
+    sp1->setRightView(editor);
+
+    // SDLSurfaceView *surfaceView = new SDLSurfaceView(Rect());
+    // surfaceView->setSurface(animation);
+    
 
     Button *b1 = new Button(Rect(10, 10, 200, 40));
     b1->setLabel("button 1");
@@ -91,27 +94,30 @@ int main() {
                     wm->sdlWindowDidResize();
                     break;
                 }
+            } else if (evt.sdl.type == SDL_QUIT) {
+                running = false;
+                break;
             } else if (!wm->dispatchEvent(&evt)) {
                 // event wasn't handled by the window manager
             }
         }
 
-        uint8_t *pixels = (uint8_t*)animation->pixels;
-        for (int j = 0; j < animation->h; ++j) {
-            uint32_t *row = (uint32_t*)pixels;
-            for (int i = 0; i < animation->w; ++i) {
-                if (i < 5) {
-                    row[i] = 0xFF000000;
-                } else if (i == animation->w / 2 && j == animation->h / 2) {
-                    row[i] = 0xFFFFFFFF;
-                } else {
-                    uint8_t r = (i + xpos);
-                    uint8_t g = (j + ypos);
-                    row[i] = 0xFF000000 | ((uint32_t)r << 16) | ((uint32_t)g << 8);
-                }
-            }
-            pixels += animation->pitch;
-        }
+        // uint8_t *pixels = (uint8_t*)animation->pixels;
+        // for (int j = 0; j < animation->h; ++j) {
+        //     uint32_t *row = (uint32_t*)pixels;
+        //     for (int i = 0; i < animation->w; ++i) {
+        //         if (i < 5) {
+        //             row[i] = 0xFF000000;
+        //         } else if (i == animation->w / 2 && j == animation->h / 2) {
+        //             row[i] = 0xFFFFFFFF;
+        //         } else {
+        //             uint8_t r = (i + xpos);
+        //             uint8_t g = (j + ypos);
+        //             row[i] = 0xFF000000 | ((uint32_t)r << 16) | ((uint32_t)g << 8);
+        //         }
+        //     }
+        //     pixels += animation->pitch;
+        // }
 
         wm->render();
 

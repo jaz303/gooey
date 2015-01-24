@@ -23,6 +23,7 @@ set(SOURCE_FILES
     include/gooey/cmp/Panel.hpp
     include/gooey/cmp/SDLSurfaceView.hpp
     include/gooey/cmp/SplitView.hpp
+    include/gooey/cmp/TextEditor.hpp
 
     include/gooey/fwd.hpp
     include/gooey/gooey.hpp
@@ -39,6 +40,7 @@ set(SOURCE_FILES
     src/cmp/Panel.cpp
     src/cmp/SDLSurfaceView.cpp
     src/cmp/SplitView.cpp
+    src/cmp/TextEditor.cpp
 
     src/debug.cpp
 

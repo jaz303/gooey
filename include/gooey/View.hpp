@@ -46,6 +46,7 @@ public:
      */
     virtual View* findEventTarget(Event *evt);
     virtual void dispatchEvent(Event *evt);
+    virtual void dispatchKeyEvent(Event *evt);
 
 protected:
 

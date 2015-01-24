@@ -12,12 +12,18 @@ WindowManager::WindowManager(SDL_Window *window, SDL_Renderer *renderer)
     , renderer_(renderer)
     , rootWindow_(0)
     , tappedView_(0)
+    , keyWindow_(0)
 {
     sdlWindowDidResize();
 }
 
 bool WindowManager::dispatchEvent(Event *evt)
 {
+    if (evt->isKeyboard() && keyWindow_) {
+        keyWindow_->dispatchKeyEvent(evt);
+        return true;
+    }
+
     if (evt->isSpatial()) {
         for (auto iter = windows_.rbegin(); iter != windows_.rend(); ++iter) {
             Window *window = *iter;

@@ -21,6 +21,7 @@ class Label;
 class Panel;
 class SDLSurfaceView;
 class SplitView;
+class TextEditor;
 
 }
 

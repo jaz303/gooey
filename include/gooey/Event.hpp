@@ -60,6 +60,11 @@ struct Event {
                 || sdl.type == SDL_MOUSEBUTTONUP;
     }
 
+    inline bool isKeyboard() const {
+        return sdl.type == SDL_KEYDOWN
+                || sdl.type == SDL_KEYUP;
+    }
+
     Point targetTopLeftScreen() const;
     Point targetCenterScreen() const;
 

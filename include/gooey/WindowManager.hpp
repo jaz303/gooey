@@ -45,6 +45,7 @@ private:
     std::vector<Window*>    windows_;
     Window                  *rootWindow_;
     View                    *tappedView_;
+    Window                  *keyWindow_;
 
 };
 

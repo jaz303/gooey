@@ -31,6 +31,8 @@ public:
 
     View* findEventTarget(Event *evt);
 
+    void dispatchKeyEvent(Event *evt);
+
 private:
 
     WindowManager       *windowManager_;
@@ -38,6 +40,7 @@ private:
     SDL_Surface         *sdlSurface_;
     Rect                rect_;
     std::vector<View*>  views_;
+    View*               focusedView_;
 
 };
 

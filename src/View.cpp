@@ -38,6 +38,10 @@ void View::dispatchEvent(Event *evt)
 {
 }
 
+void View::dispatchKeyEvent(Event *evt)
+{
+}
+
 //
 // Protected
 
